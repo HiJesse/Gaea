@@ -25,7 +25,29 @@ android {
 
 atlas {
 
+    // atlas 插件的开关, 打开后会在编译期做很多事情
     atlasEnabled true
+
+    tBuildConfig {
+        // 指定第一个需要启动的bundle
+        autoStartBundles = [project.atlasConfig['autoStartBundles']]
+        // 指定远程bundle
+        outOfApkBundles = ['']
+        // 自定义初始化入口. 回调时机是在atlas对系统进行hack之后, atlas框架开始初始化之前
+        preLaunch = ''
+        classInject false
+    }
+
+    manifestOptions {
+        addAtlasProxyComponents true
+    }
+
+
+    patchConfigs {
+        debug {
+            createTPatch true
+        }
+    }
 
 }
 
@@ -39,4 +61,5 @@ dependencies {
     compile project.libs["constraint-layout"]
     compile project.libs["atlas-core"]
     compile project.libs["atlas-update"]
+    bundleCompile project(':app.main')
 }
