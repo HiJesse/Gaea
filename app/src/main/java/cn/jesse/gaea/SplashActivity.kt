@@ -5,6 +5,11 @@ import android.os.Bundle
 import cn.jesse.gaea.lib.base.ui.BaseActivity
 import kotlinx.android.synthetic.main.host_activity_splash.*
 
+/**
+ * 闪屏欢迎页
+ *
+ * @author Jesse
+ */
 class SplashActivity : BaseActivity() {
 
     override fun getTag(): String {

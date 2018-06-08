@@ -1,6 +1,7 @@
 package cn.jesse.gaea
 
 import android.app.Application
+import cn.jesse.gaea.lib.base.util.ContextUtil
 import cn.jesse.nativelogger.NLogger
 import cn.jesse.nativelogger.NLoggerConfig
 import cn.jesse.nativelogger.formatter.SimpleFormatter
@@ -20,6 +21,8 @@ class GaeaApplication : Application() {
      * 初始化各种服务
      */
     private fun initService() {
+        // 初始化application context
+        ContextUtil.init(this)
         // 初始化日志
         NLoggerConfig.getInstance()
                 .builder()
