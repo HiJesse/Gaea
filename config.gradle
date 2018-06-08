@@ -23,6 +23,6 @@ ext {
     ]
 
     atlasConfig = [
-            'autoStartBundles' : 'cn.jesse.gaea.app.main'
+            'autoStartBundles' : 'cn.jesse.gaea.plugin.main'
     ]
 }

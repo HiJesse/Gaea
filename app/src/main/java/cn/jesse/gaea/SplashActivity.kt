@@ -13,7 +13,7 @@ class SplashActivity : AppCompatActivity() {
 
         tvSplash.postDelayed({
             val intent = Intent()
-            intent.setClassName(baseContext, "cn.jesse.gaea.app.main.MainActivity")
+            intent.setClassName(baseContext, "cn.jesse.gaea.plugin.main.MainActivity")
             startActivity(intent)
             finish()
         }, 3000)

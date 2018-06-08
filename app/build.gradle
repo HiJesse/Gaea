@@ -61,5 +61,5 @@ dependencies {
     compile project.libs["constraint-layout"]
     compile project.libs["atlas-core"]
     compile project.libs["atlas-update"]
-    bundleCompile project(':app.main')
+    bundleCompile project(':plugin.main')
 }
