@@ -14,6 +14,10 @@ android {
         versionCode project.versionCode
         versionName project.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters "x86","armeabi"
+        }
     }
     buildTypes {
         release {
@@ -53,13 +57,7 @@ atlas {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile project.libs['junit']
-    androidTestCompile project.libs['espresso']
-    androidTestCompile project.libs['runner']
-    compile project.libs["support-v7"]
-    compile project.libs["kotlin"]
-    compile project.libs["constraint-layout"]
-    compile project.libs["atlas-core"]
     compile project.libs["atlas-update"]
+    compile project(':lib.base')
     bundleCompile project(':plugin.main')
 }

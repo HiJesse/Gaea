@@ -1,16 +1,22 @@
 package cn.jesse.gaea
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import cn.jesse.gaea.lib.base.ui.BaseActivity
 import kotlinx.android.synthetic.main.host_activity_splash.*
 
-class SplashActivity : AppCompatActivity() {
+class SplashActivity : BaseActivity() {
+
+    override fun getTag(): String {
+        return "Host.SplashActivity"
+    }
+
+    override fun getContentLayout(): Int {
+        return R.layout.host_activity_splash
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.host_activity_splash)
-
         tvSplash.postDelayed({
             val intent = Intent()
             intent.setClassName(baseContext, "cn.jesse.gaea.plugin.main.MainActivity")
