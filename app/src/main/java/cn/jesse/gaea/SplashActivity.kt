@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.host_activity_splash.*
  */
 class SplashActivity : BaseActivity() {
 
-    override fun getTag(): String {
+    override fun getLogTag(): String {
         return "Host.SplashActivity"
     }
 
@@ -24,7 +24,7 @@ class SplashActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         tvSplash.postDelayed({
             val intent = Intent()
-            intent.setClassName(baseContext, "cn.jesse.gaea.plugin.main.MainActivity")
+            intent.setClassName(baseContext, "cn.jesse.gaea.plugin.main.ui.activity.MainActivity")
             startActivity(intent)
             finish()
         }, 3000)

@@ -6,7 +6,7 @@
         android:supportsRtl="true">
 
         <activity
-            android:name=".MainActivity"/>
+            android:name=".ui.activity.MainActivity"/>
 
     </application>
 

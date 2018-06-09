@@ -14,7 +14,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mTag = getTag()
+        mTag = getLogTag()
         NLogger.d(mTag, "onCreate")
         setContentView(getContentLayout())
     }
@@ -50,9 +50,9 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     /**
-     * 获取TAG
+     * 获取日志TAG
      */
-    abstract fun getTag(): String
+    abstract fun getLogTag(): String
 
     /**
      * 获取要初始化的layout id

@@ -1,4 +1,4 @@
-package cn.jesse.gaea.plugin.main
+package cn.jesse.gaea.plugin.main.ui.activity
 
 import android.os.Bundle
 import android.support.v4.view.ViewPager
@@ -7,6 +7,7 @@ import cn.jesse.gaea.lib.base.ui.BaseActivity
 import cn.jesse.gaea.lib.base.util.AppUtil
 import cn.jesse.gaea.lib.base.util.CheckUtil
 import cn.jesse.gaea.lib.base.util.DoubleExitUtil
+import cn.jesse.gaea.plugin.main.R
 import cn.jesse.gaea.plugin.main.ui.adapter.ViewPagerAdapter
 import cn.jesse.nativelogger.NLogger
 import kotlinx.android.synthetic.main.main_activity_main.*
@@ -19,7 +20,7 @@ import kotlinx.android.synthetic.main.main_activity_main.*
 class MainActivity : BaseActivity() {
     private var menuItem: MenuItem? = null
 
-    override fun getTag(): String {
+    override fun getLogTag(): String {
         return "Main.MainActivity"
     }
 
