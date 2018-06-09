@@ -15,6 +15,7 @@ ext {
             'runner'           : 'com.android.support.test:runner:1.0.1',
             'espresso'         : 'com.android.support.test.espresso:espresso-core:3.0.1',
             'support-v7'       : 'com.android.support:appcompat-v7:27.0.2',
+            'design'           : 'com.android.support:design:27.0.2',
             'constraint-layout': 'com.android.support.constraint:constraint-layout:1.0.2',
             'kotlin'           : 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.41',
             'atlas-core'       : "com.taobao.android:atlas_core:5.0.8.0-rc7@aar",

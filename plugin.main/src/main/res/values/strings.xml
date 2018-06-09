@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">plugin.main</string>
+    <string name="host_main_menu_main">首页</string>
+    <string name="host_main_menu_discovery">发现</string>
+    <string name="host_main_menu_user">我的</string>
 </resources>
