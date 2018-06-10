@@ -5,6 +5,9 @@
         android:allowBackup="true"
         android:supportsRtl="true">
 
+        <activity
+            android:name=".ui.activity.LoginActivity"/>
+
         <meta-data
             android:name="atlas.fragment.intent.action.user"
             android:value="cn.jesse.gaea.plugin.user.ui.fragment.UserFragment" />

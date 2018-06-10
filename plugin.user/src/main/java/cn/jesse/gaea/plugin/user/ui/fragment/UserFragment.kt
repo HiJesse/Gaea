@@ -1,5 +1,6 @@
 package cn.jesse.gaea.plugin.user.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.taobao.atlas.remote.IRemote
 import android.taobao.atlas.remote.IRemoteTransactor
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import cn.jesse.gaea.lib.base.ui.BaseFragment
 import cn.jesse.gaea.plugin.user.R
+import kotlinx.android.synthetic.main.user_fragment_user.*
 
 /**
  * 用户中心Fragment
@@ -22,6 +24,15 @@ class UserFragment : BaseFragment(), IRemote {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.user_fragment_user, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        btnLogin.setOnClickListener {
+            val intent = Intent()
+            intent.setClassName(activity, "cn.jesse.gaea.plugin.user.ui.activity.LoginActivity")
+            startActivity(intent)
+        }
     }
 
     override fun call(commandName: String?, args: Bundle?, callback: IRemoteTransactor.IResponse?): Bundle {

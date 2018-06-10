@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">plugin.user</string>
 
-    <string name="user_fragment_welcome">欢迎来到用户页面</string>
+    <string name="user_fragment_welcome">欢迎来到User模块用户页面</string>
+
+    <string name="user_activity_login_welcome">欢迎来到User模块登录</string>
+    <string name="user_activity_login_succeed">设置登录成功</string>
+    <string name="user_activity_login_failed">设置登录失败</string>
 </resources>

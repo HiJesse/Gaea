@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Gaea</string>
+    <string name="host_welcome">欢迎来到Host模块闪屏页</string>
 </resources>

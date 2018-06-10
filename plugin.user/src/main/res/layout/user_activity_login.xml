@@ -9,14 +9,22 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:text="@string/main_fragment_welcome" />
+        android:text="@string/user_activity_login_welcome" />
 
     <Button
-        android:id="@+id/btnLogin"
+        android:id="@+id/btnLoginSucceed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_margin="10dp"
-        android:text="@string/main_fragment_login" />
+        android:text="@string/user_activity_login_succeed" />
+
+    <Button
+        android:id="@+id/btnLoginFailed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:text="@string/user_activity_login_failed" />
 
 </LinearLayout>
