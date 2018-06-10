@@ -1,0 +1,38 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.taobao.atlas'
+
+android {
+    compileSdkVersion project.targetSdkVersion
+    buildToolsVersion project.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion project.minSdkVersion
+        targetSdkVersion project.targetSdkVersion
+        versionCode project.versionCode
+        versionName project.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+atlas {
+
+    bundleConfig{
+        // 声明bundle
+        awbBundle true
+    }
+
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    providedCompile project(':lib.base')
+}

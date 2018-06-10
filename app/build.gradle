@@ -60,4 +60,5 @@ dependencies {
     compile project.libs["atlas-update"]
     compile project(':lib.base')
     bundleCompile project(':plugin.main')
+    bundleCompile project(':plugin.user')
 }
