@@ -9,7 +9,16 @@ class ViewPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(
     private val fragmentList: MutableList<Fragment> = ArrayList()
 
     init {
-        fragmentList.add(MainFragment.newInstance() as Fragment)
+        fragmentList.add(MainFragment.newInstance())
+        fragmentList.add(MainFragment.newInstance())
+    }
+
+    /**
+     * 外部添加fragment
+     */
+    fun addFragment(fragment: Fragment) {
+        fragmentList.add(fragment)
+        notifyDataSetChanged()
     }
 
     override fun getItem(position: Int): Fragment {

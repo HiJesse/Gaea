@@ -18,14 +18,14 @@ ext {
             'design'           : 'com.android.support:design:27.0.2',
             'constraint-layout': 'com.android.support.constraint:constraint-layout:1.0.2',
             'kotlin'           : 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.41',
-            'atlas-core'       : "com.taobao.android:atlas_core:5.0.8.0-rc7@aar",
-            'atlas-update'     : "com.taobao.android:atlasupdate:1.1.4.14@aar",
+            'atlas-core'       : "com.taobao.android:atlas_core:5.1.0.0@aar",
+            'atlas-update'     : "com.taobao.android:atlasupdate:1.1.4.21@aar",
 
             'NLogger'          : 'com.github.hijesse:android-logger:2.5.0',
             'Toasty'           : 'com.github.GrenderG:Toasty:1.3.0',
     ]
 
     atlasConfig = [
-            'autoStartBundles': 'cn.jesse.gaea.plugin.main'
+            'autoStartBundles': ['cn.jesse.gaea.plugin.main', 'cn.jesse.gaea.plugin.user']
     ]
 }
