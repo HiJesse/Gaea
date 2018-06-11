@@ -27,6 +27,7 @@ class SplashActivity : BaseActivity() {
             intent.setClassName(baseContext, "cn.jesse.gaea.plugin.main.ui.activity.MainActivity")
             startActivity(intent)
             finish()
+            overridePendingTransition(R.anim.host_activity_in, R.anim.host_activity_out)
         }, 3000)
     }
 }
