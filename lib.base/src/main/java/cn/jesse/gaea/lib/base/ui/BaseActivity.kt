@@ -17,6 +17,7 @@ abstract class BaseActivity : AppCompatActivity() {
         mTag = getLogTag()
         NLogger.d(mTag, "onCreate")
         setContentView(getContentLayout())
+        onActivityCreated()
     }
 
     override fun onStart() {
@@ -58,4 +59,9 @@ abstract class BaseActivity : AppCompatActivity() {
      * 获取要初始化的layout id
      */
     abstract fun getContentLayout(): Int
+
+    /**
+     * activity onCreate之后回调
+     */
+    abstract fun onActivityCreated()
 }

@@ -33,9 +33,7 @@ class MainActivity : BaseActivity(), RemoteFactory.OnRemoteStateListener<RemoteF
         return R.layout.main_activity_main
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
+    override fun onActivityCreated() {
         // 设置退出app 监听
         DoubleExitUtil.getInstance().listener = {
             NLogger.d(mTag, "exit app")

@@ -20,8 +20,7 @@ class SplashActivity : BaseActivity() {
         return R.layout.host_activity_splash
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onActivityCreated() {
         tvSplash.postDelayed({
             val intent = Intent()
             intent.setClassName(baseContext, "cn.jesse.gaea.plugin.main.ui.activity.MainActivity")
