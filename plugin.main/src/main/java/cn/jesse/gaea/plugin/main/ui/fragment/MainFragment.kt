@@ -7,8 +7,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import cn.jesse.gaea.lib.base.router.ActivityRouter
 import cn.jesse.gaea.lib.base.ui.BaseFragment
+import cn.jesse.gaea.lib.common.constant.RemoteRouterDef
 import cn.jesse.gaea.plugin.main.R
+import cn.jesse.gaea.plugin.main.ui.activity.MainActivity
 import cn.jesse.nativelogger.NLogger
 import kotlinx.android.synthetic.main.main_fragment_main.*
 
@@ -31,9 +34,7 @@ class MainFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         btnLogin.setOnClickListener {
-            val intent = Intent()
-            intent.setClassName(activity, "cn.jesse.gaea.plugin.user.ui.activity.LoginActivity")
-            startActivityForResult(intent, 1000)
+            ActivityRouter.startActivity(this, RemoteRouterDef.PluginUser.ACTIVITY_LOGIN, RemoteRouterDef.PluginUser.CODE_LOGIN_STATUS)
         }
 
         showLoginStatus()
@@ -53,8 +54,8 @@ class MainFragment : BaseFragment() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == 1000 && resultCode == Activity.RESULT_OK) {
-            loginStatus = data?.extras?.getBoolean("STATUS_LOGIN")!!
+        if (requestCode == RemoteRouterDef.PluginUser.CODE_LOGIN_STATUS && resultCode == Activity.RESULT_OK) {
+            loginStatus = data?.extras?.getBoolean(RemoteRouterDef.PluginUser.PARAMS_LOGIN_STATUS)!!
             NLogger.d(mTag, "login status $loginStatus")
             showLoginStatus()
         }

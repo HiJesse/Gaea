@@ -9,7 +9,7 @@
             android:name=".ui.activity.LoginActivity"/>
 
         <meta-data
-            android:name="atlas.fragment.intent.action.user"
+            android:name="atlas.fragment.intent.action.user.userCenter"
             android:value="cn.jesse.gaea.plugin.user.ui.fragment.UserFragment" />
 
     </application>

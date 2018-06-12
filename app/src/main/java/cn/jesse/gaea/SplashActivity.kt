@@ -1,8 +1,8 @@
 package cn.jesse.gaea
 
-import android.content.Intent
-import android.os.Bundle
+import cn.jesse.gaea.lib.base.router.ActivityRouter
 import cn.jesse.gaea.lib.base.ui.BaseActivity
+import cn.jesse.gaea.lib.common.constant.RemoteRouterDef
 import kotlinx.android.synthetic.main.host_activity_splash.*
 
 /**
@@ -22,9 +22,7 @@ class SplashActivity : BaseActivity() {
 
     override fun onActivityCreated() {
         tvSplash.postDelayed({
-            val intent = Intent()
-            intent.setClassName(baseContext, "cn.jesse.gaea.plugin.main.ui.activity.MainActivity")
-            startActivity(intent)
+            ActivityRouter.startActivity(this, RemoteRouterDef.PluginMain.ACTIVITY_MAIN)
             finish()
             overridePendingTransition(R.anim.host_activity_in, R.anim.host_activity_out)
         }, 3000)

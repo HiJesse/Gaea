@@ -10,6 +10,7 @@ import cn.jesse.gaea.lib.base.util.AppUtil
 import cn.jesse.gaea.lib.base.util.AtlasRemoteUtil
 import cn.jesse.gaea.lib.base.util.CheckUtil
 import cn.jesse.gaea.lib.base.util.DoubleExitUtil
+import cn.jesse.gaea.lib.common.constant.RemoteRouterDef
 import cn.jesse.gaea.plugin.main.R
 import cn.jesse.gaea.plugin.main.ui.adapter.ViewPagerAdapter
 import cn.jesse.nativelogger.NLogger
@@ -87,7 +88,7 @@ class MainActivity : BaseActivity(), RemoteFactory.OnRemoteStateListener<RemoteF
         })
 
         vpContent.adapter = adapter
-        AtlasRemoteUtil.fetchRemote(this, "atlas.fragment.intent.action.user", RemoteFragment::class.java, this)
+        AtlasRemoteUtil.fetchRemote(this, RemoteRouterDef.PluginUser.FRAGMENT_USER_CENTER, RemoteFragment::class.java, this)
     }
 
     override fun onFailed(errorInfo: String?) {
