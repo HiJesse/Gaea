@@ -1,1 +1,1 @@
-include ':app', ':plugin.main', ':lib.base', ':plugin.user'
+include ':app', ':lib.base', ':lib.common', ':plugin.main', ':plugin.user'

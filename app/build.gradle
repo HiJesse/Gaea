@@ -58,7 +58,7 @@ atlas {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project.libs["atlas-update"]
-    compile project(':lib.base')
+    compile project(':lib.common')
     bundleCompile project(':plugin.main')
     bundleCompile project(':plugin.user')
 }

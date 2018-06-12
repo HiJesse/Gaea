@@ -1,7 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'com.taobao.atlas'
 
 android {
     compileSdkVersion project.targetSdkVersion
@@ -12,7 +11,7 @@ android {
         targetSdkVersion project.targetSdkVersion
         versionCode project.versionCode
         versionName project.versionName
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
     buildTypes {
         release {
@@ -23,16 +22,10 @@ android {
 
 }
 
-atlas {
-
-    bundleConfig{
-        // 声明bundle
-        awbBundle true
-    }
-
-}
-
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    providedCompile project(':lib.common')
+    testCompile project.libs['junit']
+    androidTestCompile project.libs['espresso']
+    androidTestCompile project.libs['runner']
+    compile project(':lib.base')
 }
