@@ -36,7 +36,7 @@ atlas {
         // 指定第一个需要启动的bundle
         autoStartBundles = [project.atlasConfig['autoStartBundles']]
         // 指定远程bundle
-        outOfApkBundles = ['']
+        outOfApkBundles = [project.atlasConfig['outOfApkBundles']]
         // 自定义初始化入口. 回调时机是在atlas对系统进行hack之后, atlas框架开始初始化之前
         preLaunch = ''
         classInject false
@@ -61,4 +61,5 @@ dependencies {
     compile project(':lib.common')
     bundleCompile project(':plugin.main')
     bundleCompile project(':plugin.user')
+    bundleCompile project(':remote.scanner')
 }

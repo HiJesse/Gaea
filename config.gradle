@@ -26,6 +26,7 @@ ext {
     ]
 
     atlasConfig = [
-            'autoStartBundles': 'cn.jesse.gaea.plugin.main,cn.jesse.gaea.plugin.user'
+            'autoStartBundles': 'cn.jesse.gaea.plugin.main,cn.jesse.gaea.plugin.user',
+            'outOfApkBundles': 'remote.scanner'
     ]
 }
