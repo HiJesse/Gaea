@@ -1,1 +1,1 @@
-include ':app', ':lib.base', ':lib.common', ':plugin.main', ':plugin.user', ':remote.scanner'
+include ':app', ':lib.base', ':plugin.main', ':plugin.user', ':remote.scanner'

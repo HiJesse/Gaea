@@ -9,9 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import cn.jesse.gaea.lib.base.router.ActivityRouter
 import cn.jesse.gaea.lib.base.ui.BaseFragment
-import cn.jesse.gaea.lib.common.constant.RemoteRouterDef
+import cn.jesse.gaea.lib.base.constant.RemoteRouterDef
 import cn.jesse.gaea.plugin.main.R
-import cn.jesse.gaea.plugin.main.ui.activity.MainActivity
 import cn.jesse.nativelogger.NLogger
 import kotlinx.android.synthetic.main.main_fragment_main.*
 

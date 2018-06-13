@@ -34,5 +34,5 @@ atlas {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    providedCompile project(':lib.common')
+    providedCompile project(':lib.base')
 }

@@ -23,10 +23,11 @@ ext {
 
             'NLogger'          : 'com.github.hijesse:android-logger:2.5.0',
             'Toasty'           : 'com.github.GrenderG:Toasty:1.3.0',
+            'ZXing'            : 'com.google.zxing:core:3.3.3',
     ]
 
     atlasConfig = [
             'autoStartBundles': 'cn.jesse.gaea.plugin.main,cn.jesse.gaea.plugin.user',
-            'outOfApkBundles': 'remote.scanner'
+            'outOfApkBundles' : 'remote.scanner'
     ]
 }

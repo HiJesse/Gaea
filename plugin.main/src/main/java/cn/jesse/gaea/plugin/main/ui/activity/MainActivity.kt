@@ -1,6 +1,5 @@
 package cn.jesse.gaea.plugin.main.ui.activity
 
-import android.os.Bundle
 import android.support.v4.view.ViewPager
 import android.taobao.atlas.remote.RemoteFactory
 import android.taobao.atlas.remote.fragment.RemoteFragment
@@ -10,7 +9,7 @@ import cn.jesse.gaea.lib.base.util.AppUtil
 import cn.jesse.gaea.lib.base.util.AtlasRemoteUtil
 import cn.jesse.gaea.lib.base.util.CheckUtil
 import cn.jesse.gaea.lib.base.util.DoubleExitUtil
-import cn.jesse.gaea.lib.common.constant.RemoteRouterDef
+import cn.jesse.gaea.lib.base.constant.RemoteRouterDef
 import cn.jesse.gaea.plugin.main.R
 import cn.jesse.gaea.plugin.main.ui.adapter.ViewPagerAdapter
 import cn.jesse.nativelogger.NLogger
