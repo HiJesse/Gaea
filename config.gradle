@@ -28,6 +28,38 @@ ext {
 
     atlasConfig = [
             'autoStartBundles': 'cn.jesse.gaea.plugin.main,cn.jesse.gaea.plugin.user',
-            'outOfApkBundles' : 'remote.scanner'
+            'outOfApkBundles' : computeRemoteBundles()
     ]
+}
+
+/**
+ * 提供计算远程bundle的配置, 方便在dev时开发调试
+ *
+ * @return 远程bundle
+ */
+def computeRemoteBundles() {
+    String remoteBundles = ""
+
+    final boolean isScannerRemote = false
+
+    if (isScannerRemote) {
+        remoteBundles = addSplit(remoteBundles, 'remote.scanner')
+    }
+
+    print("computeRemoteBundles: ${remoteBundles} \n")
+    return remoteBundles
+}
+
+/**
+ * 根据情况判断是否添加分隔符
+ *
+ * @param origin 原bundle
+ * @param bundle 要添加的bundle
+ * @return bundle 或者添加分隔符
+ */
+def addSplit(String origin, String bundle) {
+    if (origin.empty) {
+        return bundle
+    }
+    return "${origin},${bundle}"
 }
