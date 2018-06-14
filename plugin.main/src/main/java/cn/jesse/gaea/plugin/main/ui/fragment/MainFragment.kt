@@ -11,6 +11,7 @@ import cn.jesse.gaea.lib.base.router.ActivityRouter
 import cn.jesse.gaea.lib.base.ui.BaseFragment
 import cn.jesse.gaea.lib.base.constant.RemoteRouterDef
 import cn.jesse.gaea.plugin.main.R
+import cn.jesse.gaea.plugin.main.ui.constant.PluginDef
 import cn.jesse.nativelogger.NLogger
 import kotlinx.android.synthetic.main.main_fragment_main.*
 
@@ -23,7 +24,7 @@ class MainFragment : BaseFragment() {
     private var loginStatus = false
 
     override fun getLogTag(): String {
-        return "Main.MainFragment"
+        return "${PluginDef.TAG}.MainFragment"
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

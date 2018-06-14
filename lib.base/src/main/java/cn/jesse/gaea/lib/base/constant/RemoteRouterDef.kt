@@ -46,10 +46,10 @@ object RemoteRouterDef {
         val BASE_FRAGMENT = "${CommonPackageDef.ACTION_FRAGMENT}.${CommonPackageDef.PackagePlugin.SCANNER}"
 
         // activity 相关
-        val ACTIVITY_LOGIN = "${BASE_ACTIVITY}.ScannerActivity"
+        val ACTIVITY_SCAN = "${BASE_ACTIVITY}.ScannerActivity"
 
         // fragment相关
-        val FRAGMENT_USER_CENTER = "${BASE_FRAGMENT}.scanner"
+        val FRAGMENT_SCAN = "${BASE_FRAGMENT}.scanner"
     }
 
     /**

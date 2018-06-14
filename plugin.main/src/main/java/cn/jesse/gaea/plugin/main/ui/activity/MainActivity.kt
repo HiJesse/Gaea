@@ -12,6 +12,7 @@ import cn.jesse.gaea.lib.base.util.DoubleExitUtil
 import cn.jesse.gaea.lib.base.constant.RemoteRouterDef
 import cn.jesse.gaea.plugin.main.R
 import cn.jesse.gaea.plugin.main.ui.adapter.ViewPagerAdapter
+import cn.jesse.gaea.plugin.main.ui.constant.PluginDef
 import cn.jesse.nativelogger.NLogger
 import kotlinx.android.synthetic.main.main_activity_main.*
 
@@ -26,7 +27,7 @@ class MainActivity : BaseActivity(), RemoteFactory.OnRemoteStateListener<RemoteF
     private var adapter = ViewPagerAdapter(supportFragmentManager)
 
     override fun getLogTag(): String {
-        return "Main.MainActivity"
+        return "${PluginDef.TAG}.MainActivity"
     }
 
     override fun getContentLayout(): Int {
