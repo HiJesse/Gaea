@@ -1,8 +1,10 @@
 package cn.jesse.gaea.remote.scanner.ui.activity
 
 import cn.jesse.gaea.lib.base.ui.BaseActivity
+import cn.jesse.gaea.lib.base.util.PermissionUtil
 import cn.jesse.gaea.remote.scanner.R
 import cn.jesse.gaea.remote.scanner.constant.PluginDef
+import cn.jesse.nativelogger.NLogger
 
 /**
  * 二维码条形码扫描 activity
@@ -20,7 +22,14 @@ class ScannerActivity : BaseActivity() {
     }
 
     override fun onActivityCreated() {
-
+        permissionRequester = PermissionUtil
+                .with(this)
+                .request(android.Manifest.permission.CAMERA)
+                .onAllGranted {
+                    NLogger.d(mTag, "on granted")
+                }.onAnyDenied {
+                    NLogger.d(mTag, "on denied")
+                }.ask(100)
     }
 
 }
