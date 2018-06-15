@@ -1,12 +1,15 @@
 package cn.jesse.gaea.lib.base.util
 
+import android.Manifest
+import android.Manifest.permission.*
+import android.content.Context
 import android.content.pm.PackageManager
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
 import cn.jesse.gaea.lib.base.ui.BaseActivity
 import cn.jesse.gaea.lib.base.ui.BaseFragment
 import cn.jesse.nativelogger.NLogger
+
 
 /**
  * 运行时权限工具
@@ -34,6 +37,22 @@ object PermissionUtil {
     }
 
     /**
+     * 判断是会否有权限的静态方法
+     *
+     * @param context context
+     * @param permissionName 权限名称
+     */
+    fun has(context: Context, permissionName: String): Boolean {
+        var permissionCheck = PackageManager.PERMISSION_DENIED
+
+        if (!CheckUtil.isNull(context)) {
+            permissionCheck = ContextCompat.checkSelfPermission(context, permissionName)
+        }
+
+        return permissionCheck == PackageManager.PERMISSION_GRANTED
+    }
+
+    /**
      * 权限对象, 提供获取权限和判断是否具有权限的功能
      */
     class PermissionObject {
@@ -54,8 +73,7 @@ object PermissionUtil {
          * @param permissionName 权限名称
          */
         fun has(permissionName: String): Boolean {
-            val permissionCheck = PackageManager.PERMISSION_DENIED
-            when (CheckUtil.isNull(mActivity)) {
+            val permissionCheck = when (CheckUtil.isNull(mActivity)) {
                 true -> ContextCompat.checkSelfPermission(mFragment!!.context!!, permissionName)
                 false -> ContextCompat.checkSelfPermission(mActivity!!, permissionName)
             }
@@ -156,7 +174,7 @@ object PermissionUtil {
                     false -> ContextCompat.checkSelfPermission(mActivity!!, perm.mPermissionName)
                 }
 
-                if (checkRes == PackageManager.PERMISSION_GRANTED) {
+                if (checkRes == PackageManager.PERMISSION_GRANTED && needToAskSpecificPermission(perm.mPermissionName)) {
                     neededPermissions.remove(perm)
                 } else {
                     val shouldShowRequestPermissionRationale = when (CheckUtil.isNull(mActivity)) {
@@ -174,7 +192,29 @@ object PermissionUtil {
             for (i in 0 until mPermissionsWeDontHave!!.size) {
                 mPermissionNames[i] = mPermissionsWeDontHave!![i].mPermissionName
             }
-            return mPermissionsWeDontHave!!.size !== 0
+            return mPermissionsWeDontHave!!.size != 0
+        }
+
+        /**
+         * 针对特定的权限 直接调用具体的系统api 兼容国产rom
+         *
+         * @param permissionName 权限名称
+         * @return
+         */
+        private fun needToAskSpecificPermission(permissionName: String): Boolean {
+            val context = when (CheckUtil.isNull(mActivity)) {
+                true -> mFragment!!.context!!
+                false -> mActivity!!
+            }
+
+            return when (permissionName) {
+                CAMERA -> PermissionCPUtil.checkCameraPermission()
+                READ_PHONE_STATE -> PermissionCPUtil.checkPhoneStatePermission(context)
+                READ_CONTACTS -> PermissionCPUtil.checkContactPermission(context)
+                in arrayOf(WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE) -> PermissionCPUtil.checkSDCardPermission()
+                in arrayOf(ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION) -> PermissionCPUtil.checkLocationPermission(context)
+                else -> {true}
+            }
         }
 
         /**
