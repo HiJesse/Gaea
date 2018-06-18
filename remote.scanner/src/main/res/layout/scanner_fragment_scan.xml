@@ -2,12 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent"
     android:orientation="vertical">
 
-    <SurfaceView
-        android:id="@+id/svScanner"
+    <com.journeyapps.barcodescanner.DecoratedBarcodeView
+        android:id="@+id/dbvScanner"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true" />
 
 </RelativeLayout>

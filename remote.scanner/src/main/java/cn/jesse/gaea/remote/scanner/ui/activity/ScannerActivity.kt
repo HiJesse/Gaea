@@ -4,7 +4,8 @@ import cn.jesse.gaea.lib.base.ui.BaseActivity
 import cn.jesse.gaea.lib.base.util.PermissionUtil
 import cn.jesse.gaea.remote.scanner.R
 import cn.jesse.gaea.remote.scanner.constant.PluginDef
-import cn.jesse.nativelogger.NLogger
+import cn.jesse.gaea.remote.scanner.ui.fragment.ScannerFragment
+import es.dmoral.toasty.Toasty
 
 /**
  * 二维码条形码扫描 activity
@@ -26,10 +27,14 @@ class ScannerActivity : BaseActivity() {
                 .with(this)
                 .request(android.Manifest.permission.CAMERA)
                 .onAllGranted {
-                    NLogger.d(mTag, "on granted")
+                    initScanner()
                 }.onAnyDenied {
-                    NLogger.d(mTag, "on denied")
+                    Toasty.error(this, "摄像头权限被拒").show()
                 }.ask(100)
+    }
+
+    private fun initScanner() {
+        supportFragmentManager.beginTransaction().replace(R.id.flContent, ScannerFragment.newInstance()).commitAllowingStateLoss()
     }
 
 }

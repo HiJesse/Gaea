@@ -34,4 +34,5 @@ dependencies {
     compile project.libs['atlas-core']
     compile project.libs['NLogger']
     compile project.libs['Toasty']
+    compile project.libs['ZXing']
 }

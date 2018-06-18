@@ -23,7 +23,7 @@ ext {
 
             'NLogger'          : 'com.github.hijesse:android-logger:2.5.0',
             'Toasty'           : 'com.github.GrenderG:Toasty:1.3.0',
-            'ZXing'            : 'com.google.zxing:core:3.3.3',
+            'ZXing'            : 'com.journeyapps:zxing-android-embedded:3.6.0',
     ]
 
     atlasConfig = [
