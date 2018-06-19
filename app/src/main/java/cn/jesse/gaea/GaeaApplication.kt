@@ -63,8 +63,8 @@ class GaeaApplication : Application() {
             if (remoteBundleFile.exists()) {
                 path = remoteBundleFile.absolutePath
             } else {
-                Toasty.normal(this, "远程bundle不存在，请确定 : ${remoteBundleFile.absolutePath}").show()
-                NLogger.e("远程bundle不存在，请确定 : ${remoteBundleFile.absolutePath}")
+                Toasty.normal(this, "插件不存在，请确定 : ${remoteBundleFile.absolutePath}").show()
+                NLogger.e("插件不存在，请确定 : ${remoteBundleFile.absolutePath}")
                 return@ClassNotFoundInterceptorCallback intent
             }
 
@@ -73,8 +73,8 @@ class GaeaApplication : Application() {
             try {
                 Atlas.getInstance().installBundle(info.packageName, File(path))
             } catch (e: BundleException) {
-                Toasty.normal(this, "远程bundle 安装失败, 请确定 : ${e.message}").show()
-                NLogger.e("远程bundle 安装失败, 请确定 : ${e.message}")
+                Toasty.normal(this, "插件安装失败, 请确定 : ${e.message}").show()
+                NLogger.e("插件安装失败, 请确定 : ${e.message}")
             }
 
             activity.startActivities(arrayOf(intent))
