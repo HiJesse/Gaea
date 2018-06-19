@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">plugin.user</string>
+    <string name="user_name">plugin.user</string>
 
     <string name="user_fragment_welcome">欢迎来到User模块用户页面</string>
 

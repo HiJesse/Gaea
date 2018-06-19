@@ -8,7 +8,7 @@ import cn.jesse.gaea.lib.base.constant.RemoteRouterDef
 import cn.jesse.gaea.lib.base.router.ActivityRouter
 import cn.jesse.gaea.lib.base.ui.BaseFragment
 import cn.jesse.gaea.plugin.main.R
-import cn.jesse.gaea.plugin.main.ui.constant.PluginDef
+import cn.jesse.gaea.plugin.main.constant.PluginDef
 import kotlinx.android.synthetic.main.main_fragment_discover.*
 
 /**

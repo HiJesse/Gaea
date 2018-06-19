@@ -1,4 +1,4 @@
-package cn.jesse.gaea.plugin.main.ui.constant
+package cn.jesse.gaea.plugin.main.constant
 
 /**
  * Main bundle 常量

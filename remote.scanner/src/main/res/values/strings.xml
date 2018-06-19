@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">remote.scanner</string>
+    <string name="scanner_name">remote.scanner</string>
 
     <string name="scanner_activity_welcome">欢迎来到Scanner模块扫描</string>
 </resources>
