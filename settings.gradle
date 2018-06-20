@@ -2,6 +2,7 @@ include ':app',
         // 中间件
         ':lib.base',
         ':lib.common',
+        ':lib.network',
         // 插件
         ':plugin.main',
         ':plugin.user',
