@@ -1,6 +1,6 @@
 package cn.jesse.gaea.remote.scanner.ui.activity
 
-import cn.jesse.gaea.lib.base.ui.BaseActivity
+import cn.jesse.gaea.lib.common.ui.BaseActivity
 import cn.jesse.gaea.lib.base.util.PermissionUtil
 import cn.jesse.gaea.remote.scanner.R
 import cn.jesse.gaea.remote.scanner.constant.PluginDef

@@ -1,1 +1,9 @@
-include ':app', ':lib.base', ':plugin.main', ':plugin.user', ':remote.scanner'
+include ':app',
+        // 中间件
+        ':lib.base',
+        ':lib.common',
+        // 插件
+        ':plugin.main',
+        ':plugin.user',
+        // 远程插件
+        ':remote.scanner'

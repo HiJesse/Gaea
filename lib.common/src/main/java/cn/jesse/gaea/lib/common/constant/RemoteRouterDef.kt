@@ -1,4 +1,4 @@
-package cn.jesse.gaea.lib.base.constant
+package cn.jesse.gaea.lib.common.constant
 
 /**
  * 跨bundle通讯时需要的常量汇总

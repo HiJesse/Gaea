@@ -1,8 +1,8 @@
 package cn.jesse.gaea
 
 import cn.jesse.gaea.lib.base.router.ActivityRouter
-import cn.jesse.gaea.lib.base.ui.BaseActivity
-import cn.jesse.gaea.lib.base.constant.RemoteRouterDef
+import cn.jesse.gaea.lib.common.ui.BaseActivity
+import cn.jesse.gaea.lib.common.constant.RemoteRouterDef
 import kotlinx.android.synthetic.main.host_activity_splash.*
 
 /**

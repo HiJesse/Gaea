@@ -12,7 +12,7 @@ android {
         targetSdkVersion project.targetSdkVersion
         versionCode project.versionCode
         versionName project.versionName
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
     buildTypes {
         release {
@@ -23,17 +23,10 @@ android {
 
 }
 
-atlas {
-
-    bundleConfig{
-        // 声明bundle
-        awbBundle true
-    }
-
-}
-
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile project.libs['junit']
+    androidTestCompile project.libs['espresso']
+    androidTestCompile project.libs['runner']
     providedCompile project(':lib.base')
-    providedCompile project(':lib.common')
 }

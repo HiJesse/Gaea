@@ -1,4 +1,4 @@
-package cn.jesse.gaea.lib.base.ui
+package cn.jesse.gaea.lib.common.ui
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity

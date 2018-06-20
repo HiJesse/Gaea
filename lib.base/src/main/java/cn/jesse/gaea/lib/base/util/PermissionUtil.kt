@@ -1,13 +1,12 @@
 package cn.jesse.gaea.lib.base.util
 
-import android.Manifest
 import android.Manifest.permission.*
+import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import android.support.v4.app.ActivityCompat
+import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
-import cn.jesse.gaea.lib.base.ui.BaseActivity
-import cn.jesse.gaea.lib.base.ui.BaseFragment
 import cn.jesse.nativelogger.NLogger
 
 
@@ -23,7 +22,7 @@ object PermissionUtil {
      *
      * @param activity Base
      */
-    fun with(activity: BaseActivity): PermissionObject {
+    fun with(activity: Activity): PermissionObject {
         return PermissionObject(activity)
     }
 
@@ -32,7 +31,7 @@ object PermissionUtil {
      *
      * @param fragment Base
      */
-    fun with(fragment: BaseFragment): PermissionObject {
+    fun with(fragment: Fragment): PermissionObject {
         return PermissionObject(fragment)
     }
 
@@ -56,14 +55,14 @@ object PermissionUtil {
      * 权限对象, 提供获取权限和判断是否具有权限的功能
      */
     class PermissionObject {
-        private var mActivity: BaseActivity? = null
-        private var mFragment: BaseFragment? = null
+        private var mActivity: Activity? = null
+        private var mFragment: Fragment? = null
 
-        constructor(activity: BaseActivity) {
+        constructor(activity: Activity) {
             mActivity = activity
         }
 
-        constructor(fragment: BaseFragment) {
+        constructor(fragment: Fragment) {
             mFragment = fragment
         }
 
@@ -110,8 +109,8 @@ object PermissionUtil {
 
     class PermissionRequestObject {
         private val TAG = "PermissionRequestObject"
-        private var mActivity: BaseActivity? = null
-        private var mFragment: BaseFragment? = null
+        private var mActivity: Activity? = null
+        private var mFragment: Fragment? = null
         private var mPermissionNames: Array<String>
         private var mPermissionsWeDontHave: ArrayList<SinglePermission>? = null
         private var mRequestCode: Int = 0
@@ -120,12 +119,12 @@ object PermissionUtil {
         private var mRationalFunc: ((permissionName: String) -> Unit)? = null
         private var mResultFunc: ((requestCode: Int, permissions: Array<String>, grantResult: IntArray) -> Unit)? = null
 
-        constructor(activity: BaseActivity?, permissionNames: Array<String>) {
+        constructor(activity: Activity?, permissionNames: Array<String>) {
             mActivity = activity
             mPermissionNames = permissionNames
         }
 
-        constructor(fragment: BaseFragment?, permissionNames: Array<String>) {
+        constructor(fragment: Fragment?, permissionNames: Array<String>) {
             mFragment = fragment
             mPermissionNames = permissionNames
         }

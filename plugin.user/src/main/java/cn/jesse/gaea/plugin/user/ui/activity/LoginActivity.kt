@@ -2,8 +2,8 @@ package cn.jesse.gaea.plugin.user.ui.activity
 
 import android.app.Activity
 import android.os.Bundle
-import cn.jesse.gaea.lib.base.ui.BaseActivity
-import cn.jesse.gaea.lib.base.constant.RemoteRouterDef
+import cn.jesse.gaea.lib.common.ui.BaseActivity
+import cn.jesse.gaea.lib.common.constant.RemoteRouterDef
 import cn.jesse.gaea.plugin.user.R
 import kotlinx.android.synthetic.main.user_activity_login.*
 
