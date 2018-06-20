@@ -60,6 +60,7 @@ dependencies {
     compile project.libs["atlas-update"]
     compile project(':lib.base')
     compile project(':lib.common')
+    compile project(':lib.network')
     bundleCompile project(':plugin.main')
     bundleCompile project(':plugin.user')
     bundleCompile project(':remote.scanner')

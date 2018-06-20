@@ -7,6 +7,8 @@ import android.taobao.atlas.runtime.ActivityTaskMgr
 import android.taobao.atlas.runtime.ClassNotFoundInterceptorCallback
 import android.text.TextUtils
 import cn.jesse.gaea.lib.base.util.ContextUtil
+import cn.jesse.gaea.lib.common.constant.Urls
+import cn.jesse.gaea.lib.network.HttpEngine
 import cn.jesse.nativelogger.NLogger
 import cn.jesse.nativelogger.NLoggerConfig
 import cn.jesse.nativelogger.formatter.SimpleFormatter
@@ -44,6 +46,12 @@ class GaeaApplication : Application() {
                     NLogger.e("uncaughtException", ex!!)
                     android.os.Process.killProcess(android.os.Process.myPid())
                 })
+                .build()
+
+        // 初始化网络服务
+        HttpEngine.getInstance()
+                .setBaseUrl(Urls.baseUrl)
+                .setTimeout(3000L, 3000L)
                 .build()
 
         // 设置加载远程bundle回调
