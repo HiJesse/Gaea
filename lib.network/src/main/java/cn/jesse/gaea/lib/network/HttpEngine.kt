@@ -23,9 +23,9 @@ class HttpEngine {
     private val timeoutUnit = TimeUnit.MILLISECONDS
     private val defaultTimeout = 5000L
 
-    private var apiService: BaseApiService? = null
     private lateinit var okHttpClient: OkHttpClient
     private lateinit var retrofit: Retrofit
+    private lateinit var apiService: BaseApiService
 
     private lateinit var baseUrl: String
     private var connectionTimeout = defaultTimeout
@@ -78,22 +78,30 @@ class HttpEngine {
                 .build()
 
         enable = true
+        apiService = create(BaseApiService::class.java)
+    }
+
+    /**
+     * 检查engine的状态, 异常情况下直接抛出异常
+     */
+    private fun checkStatus() {
+        if (!enable) {
+            throw throw HttpEngineInitException("u have to invoke build method first")
+        }
     }
 
     /**
      * 根据class创建对应的API service
      */
     fun <T> create(service: Class<T>?): T {
-        if (!enable) {
-            throw throw HttpEngineInitException("u have to invoke build method first")
-        }
-
+        checkStatus()
         if (CheckUtil.isNull(service)) {
             throw UnsupportedOperationException("api service is null")
         }
 
         return retrofit.create(service)
     }
+
 
     companion object {
         @SuppressLint("StaticFieldLeak")

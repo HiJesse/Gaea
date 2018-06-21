@@ -49,9 +49,11 @@ class GaeaApplication : Application() {
                 .build()
 
         // 初始化网络服务
+        val httpHeaders = mapOf(Pair("App", "Gaea"))
         HttpEngine.getInstance()
                 .setBaseUrl(Urls.baseUrl)
                 .setTimeout(3000L, 3000L)
+                .setHttpHeader(httpHeaders)
                 .build()
 
         // 设置加载远程bundle回调

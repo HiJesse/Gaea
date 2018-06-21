@@ -4,7 +4,12 @@ import android.app.Activity
 import android.os.Bundle
 import cn.jesse.gaea.lib.common.ui.BaseActivity
 import cn.jesse.gaea.lib.common.constant.RemoteRouterDef
+import cn.jesse.gaea.lib.network.HttpEngine
 import cn.jesse.gaea.plugin.user.R
+import cn.jesse.gaea.plugin.user.api.UserService
+import cn.jesse.nativelogger.NLogger
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.user_activity_login.*
 
 class LoginActivity : BaseActivity() {
@@ -18,6 +23,18 @@ class LoginActivity : BaseActivity() {
     }
 
     override fun onActivityCreated() {
+        HttpEngine.getInstance()
+                .create(UserService::class.java)
+                .login()
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({data ->
+                    NLogger.d(mTag, "${data.data}")
+                }, {e ->
+                    NLogger.e(mTag, "error $e")
+                })
+
         btnLoginSucceed.setOnClickListener {
             setLoginStatus(true)
         }
