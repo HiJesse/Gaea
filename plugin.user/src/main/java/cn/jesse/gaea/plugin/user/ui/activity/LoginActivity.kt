@@ -2,14 +2,14 @@ package cn.jesse.gaea.plugin.user.ui.activity
 
 import android.app.Activity
 import android.os.Bundle
-import cn.jesse.gaea.lib.common.ui.BaseActivity
 import cn.jesse.gaea.lib.common.constant.RemoteRouterDef
+import cn.jesse.gaea.lib.common.ui.BaseActivity
 import cn.jesse.gaea.lib.network.HttpEngine
+import cn.jesse.gaea.lib.network.transformer.IOMainThreadTransformer
+import cn.jesse.gaea.lib.network.transformer.ResponseTransformer
 import cn.jesse.gaea.plugin.user.R
 import cn.jesse.gaea.plugin.user.api.UserService
 import cn.jesse.nativelogger.NLogger
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.user_activity_login.*
 
 class LoginActivity : BaseActivity() {
@@ -26,11 +26,10 @@ class LoginActivity : BaseActivity() {
         HttpEngine.getInstance()
                 .create(UserService::class.java)
                 .login()
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(IOMainThreadTransformer())
+                .compose(ResponseTransformer())
                 .subscribe({data ->
-                    NLogger.d(mTag, "${data.data}")
+                    NLogger.d(mTag, "${data.nickname}")
                 }, {e ->
                     NLogger.e(mTag, "error $e")
                 })

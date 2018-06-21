@@ -14,7 +14,14 @@ package cn.jesse.gaea.lib.network.base
  * @author Jesse
  */
 class BaseResponse<T> {
-    var code: Int = 0
+    var code: Int = -1
     var msg: String? = null
     var data: T? = null
+
+    /**
+     * 业务数据是否正常
+     */
+    fun isSucceed(): Boolean {
+        return code == 0
+    }
 }
