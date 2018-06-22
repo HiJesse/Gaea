@@ -1,4 +1,4 @@
-package cn.jesse.gaea.plugin.user.api
+package cn.jesse.gaea.plugin.user.bean
 
 import java.io.Serializable
 

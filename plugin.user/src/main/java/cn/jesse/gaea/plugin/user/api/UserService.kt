@@ -2,6 +2,7 @@ package cn.jesse.gaea.plugin.user.api
 
 import retrofit2.http.GET
 import cn.jesse.gaea.lib.network.base.BaseResponse
+import cn.jesse.gaea.plugin.user.bean.LoginBean
 import io.reactivex.Observable
 
 /**

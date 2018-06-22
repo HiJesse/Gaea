@@ -7,7 +7,7 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import cn.jesse.gaea.lib.common.ui.BaseFragment
+import cn.jesse.gaea.lib.base.ui.BaseFragment
 import cn.jesse.gaea.lib.base.util.CheckUtil
 import cn.jesse.gaea.remote.scanner.R
 import cn.jesse.gaea.remote.scanner.constant.PluginDef

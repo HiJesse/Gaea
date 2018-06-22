@@ -1,4 +1,4 @@
-package cn.jesse.gaea.lib.common.ui
+package cn.jesse.gaea.lib.base.ui
 
 import android.content.Context
 import android.os.Bundle

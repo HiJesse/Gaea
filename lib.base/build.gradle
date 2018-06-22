@@ -32,6 +32,8 @@ dependencies {
     compile project.libs['kotlin']
     compile project.libs['constraint-layout']
     compile project.libs['atlas-core']
+    compile project.libs['lifecycle-extensions']
+    compile project.libs['lifecycle-runtime']
 
     compile project.libs['retrofit']
     compile project.libs['retrofit-gson']
@@ -41,4 +43,6 @@ dependencies {
     compile project.libs['NLogger']
     compile project.libs['Toasty']
     compile project.libs['ZXing']
+
+    annotationProcessor project.libs['lifecycle-compiler']
 }

@@ -7,9 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import cn.jesse.gaea.lib.base.router.ActivityRouter
-import cn.jesse.gaea.lib.common.ui.BaseFragment
+import cn.jesse.gaea.lib.base.ui.BaseFragment
 import cn.jesse.gaea.lib.common.constant.RemoteRouterDef
 import cn.jesse.gaea.plugin.user.R
+import cn.jesse.gaea.plugin.user.constant.PluginDef
 import kotlinx.android.synthetic.main.user_fragment_user.*
 
 /**
@@ -20,7 +21,7 @@ import kotlinx.android.synthetic.main.user_fragment_user.*
 class UserFragment : BaseFragment(), IRemote {
 
     override fun getLogTag(): String {
-        return "User.UserFragment"
+        return "${PluginDef.TAG}.UserFragment"
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
