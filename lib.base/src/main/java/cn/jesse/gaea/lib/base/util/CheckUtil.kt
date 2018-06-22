@@ -20,4 +20,15 @@ object CheckUtil {
     fun isNotNull(any: Any?): Boolean {
         return !isNull(any)
     }
+
+    /**
+     * 校验两个字符串是否相等
+     */
+    fun isStringEquals(origin: String?, match: String?): Boolean {
+        return when (isNull(origin)) {
+            true -> origin == match
+            origin.equals(match) -> true
+            else -> false
+        }
+    }
 }

@@ -3,13 +3,14 @@ package cn.jesse.gaea.plugin.user.ui.activity
 import android.app.Activity
 import android.os.Bundle
 import cn.jesse.gaea.lib.common.constant.RemoteRouterDef
+import cn.jesse.gaea.lib.common.dataset.DataSetManager
 import cn.jesse.gaea.lib.common.ui.BaseActivity
 import cn.jesse.gaea.lib.network.HttpEngine
 import cn.jesse.gaea.lib.network.transformer.IOMainThreadTransformer
 import cn.jesse.gaea.lib.network.transformer.ResponseTransformer
 import cn.jesse.gaea.plugin.user.R
 import cn.jesse.gaea.plugin.user.api.UserService
-import cn.jesse.nativelogger.NLogger
+import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.user_activity_login.*
 
 class LoginActivity : BaseActivity() {
@@ -23,24 +24,33 @@ class LoginActivity : BaseActivity() {
     }
 
     override fun onActivityCreated() {
+        btnLoginSucceed.setOnClickListener {
+            login()
+        }
+
+        btnLoginFailed.setOnClickListener {
+            setLoginStatus(false)
+        }
+    }
+
+    /**
+     * 登录
+     */
+    private fun login() {
         HttpEngine.getInstance()
                 .create(UserService::class.java)
                 .login()
                 .compose(IOMainThreadTransformer())
                 .compose(ResponseTransformer())
                 .subscribe({data ->
-                    NLogger.d(mTag, "${data.nickname}")
+                    Toasty.normal(this, "用户 ${data.nickname} 登录成功").show()
+                    DataSetManager.getUserDataSet().accessToken = data.accessToken
+                    DataSetManager.getUserDataSet().nickname = data.nickname
+                    setLoginStatus(true)
                 }, {e ->
-                    NLogger.e(mTag, "error $e")
+                    Toasty.normal(this, "${e.message} 登录失败").show()
+                    setLoginStatus(false)
                 })
-
-        btnLoginSucceed.setOnClickListener {
-            setLoginStatus(true)
-        }
-
-        btnLoginFailed.setOnClickListener {
-            setLoginStatus(false)
-        }
     }
 
     /**
