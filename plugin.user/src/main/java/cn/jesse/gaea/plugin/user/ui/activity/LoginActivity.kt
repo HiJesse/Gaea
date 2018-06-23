@@ -4,6 +4,7 @@ import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import cn.jesse.gaea.lib.base.livedata.DataStatusResult
 import cn.jesse.gaea.lib.base.ui.BaseActivity
 import cn.jesse.gaea.lib.common.constant.RemoteRouterDef
 import cn.jesse.gaea.plugin.user.R
@@ -21,9 +22,14 @@ import kotlinx.android.synthetic.main.user_activity_login.*
 class LoginActivity : BaseActivity() {
     private lateinit var loginViewModel: LoginViewModel
 
-    private val loginResultObserver = Observer<LoginBean> {result ->
-        Toasty.normal(this, "用户 ${result!!.nickname} 登录成功").show()
-        setLoginStatus(true)
+    private val loginResultObserver = Observer<DataStatusResult<LoginBean>> {result ->
+        if (result!!.succeed) {
+            Toasty.normal(this, "用户 ${result.data?.nickname} 登录成功").show()
+        } else {
+            Toasty.normal(this, "登录失败 ${result.message}").show()
+        }
+
+        setLoginStatus(result.succeed)
     }
 
     override fun getLogTag(): String {
