@@ -33,6 +33,7 @@ ext {
             'Toasty'              : 'com.github.GrenderG:Toasty:1.3.0',
             'ZXing'               : 'com.journeyapps:zxing-android-embedded:3.6.0',
             'dialog'              : 'com.kongzue.dialog:dialog:2.2.3',
+            'file-downloader'     : 'com.liulishuo.filedownloader:library:1.7.4',
     ]
 
     atlasConfig = [

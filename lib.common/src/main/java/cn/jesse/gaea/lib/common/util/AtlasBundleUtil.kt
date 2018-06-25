@@ -8,9 +8,11 @@ import android.taobao.atlas.runtime.ClassNotFoundInterceptorCallback
 import android.text.TextUtils
 import cn.jesse.gaea.lib.base.util.CheckUtil
 import cn.jesse.gaea.lib.base.util.ContextUtil
+import cn.jesse.gaea.lib.base.util.FileDownloaderUtil
 import cn.jesse.gaea.lib.common.dataset.DataSetManager
 import cn.jesse.nativelogger.NLogger
 import com.kongzue.dialog.v2.SelectDialog
+import com.kongzue.dialog.v2.TipDialog
 import com.kongzue.dialog.v2.WaitDialog
 import es.dmoral.toasty.Toasty
 import org.osgi.framework.BundleException
@@ -49,12 +51,7 @@ object AtlasBundleUtil {
 
         val info = activity.packageManager.getPackageArchiveInfo(path, 0)
 
-        try {
-            Atlas.getInstance().installBundle(info.packageName, File(path))
-        } catch (e: BundleException) {
-            Toasty.normal(ContextUtil.getApplicationContext(), "插件安装失败 : ${e.message}").show()
-            NLogger.e(TAG, "插件安装失败, : ${e.message}")
-        }
+        installBundle(info.packageName, path)
 
         activity.startActivities(arrayOf(intent))
 
@@ -72,10 +69,49 @@ object AtlasBundleUtil {
         }
 
         SelectDialog.show(activity, "插件不存在", "是否下载插件 ?", "确定", { _, _ ->
-            WaitDialog.show(activity, "下载中")
+           downloadBundle(activity, bundleName, bundleInfo!!.bundleDownloadUrl!!)
         }, "取消", { _, _ ->
             // unused
         })
+    }
+
+    /**
+     * 下载bundle
+     */
+    private fun downloadBundle(activity: Activity, bundleName: String, url: String) {
+        val remoteBundleFile = File(activity.externalCacheDir, "lib" + bundleName.replace(".", "_") + ".so")
+        WaitDialog.show(activity, "下载中")
+        FileDownloaderUtil.download(url, remoteBundleFile.absolutePath, {
+            WaitDialog.show(activity, "安装中")
+            val installStatus = installBundle(bundleName, remoteBundleFile.absolutePath)
+            WaitDialog.dismiss()
+            if (installStatus) {
+                TipDialog.show(activity, "安装成功", TipDialog.SHOW_TIME_SHORT, TipDialog.TYPE_FINISH)
+            } else {
+                TipDialog.show(activity, "安装失败", TipDialog.SHOW_TIME_SHORT, TipDialog.TYPE_FINISH)
+            }
+        }, {
+            WaitDialog.dismiss()
+            TipDialog.show(activity, "下载失败", TipDialog.SHOW_TIME_SHORT, TipDialog.TYPE_FINISH)
+        })
+    }
+
+    /**
+     * 安装bundle
+     *
+     * @param bundleName 要安装的bundle名称
+     * @param path bundle物理文件路径
+     */
+    fun installBundle(bundleName: String, path: String): Boolean {
+        var succeed = false
+        try {
+            Atlas.getInstance().installBundle(bundleName, File(path))
+            succeed = true
+        } catch (e: BundleException) {
+            Toasty.normal(ContextUtil.getApplicationContext(), "插件安装失败 : ${e.message}").show()
+            NLogger.e(TAG, "插件安装失败, : ${e.message}")
+        }
+        return succeed
     }
 
 }

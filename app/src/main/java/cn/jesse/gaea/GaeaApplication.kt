@@ -11,6 +11,7 @@ import cn.jesse.nativelogger.NLoggerConfig
 import cn.jesse.nativelogger.formatter.SimpleFormatter
 import cn.jesse.nativelogger.logger.LoggerLevel
 import com.kongzue.dialog.v2.DialogSettings
+import com.liulishuo.filedownloader.FileDownloader
 
 /**
  * 入口application. 由于使用了atlas, 并不是真正意义上的入口
@@ -54,6 +55,9 @@ class GaeaApplication : Application() {
                 .setTimeout(3000L, 3000L)
                 .setHttpHeader(httpHeaders)
                 .build()
+
+        // 初始化File Downloader
+        FileDownloader.setupOnApplicationOnCreate(this)
 
         // 设置加载远程bundle回调
         Atlas.getInstance().setClassNotFoundInterceptorCallback(AtlasBundleUtil.classNotFoundInterceptorCallback)
