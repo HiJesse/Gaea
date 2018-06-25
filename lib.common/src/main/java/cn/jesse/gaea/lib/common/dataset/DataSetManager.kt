@@ -11,6 +11,8 @@ object DataSetManager {
 
     @Volatile
     private var userDataSet: UserDataSet? = null
+    @Volatile
+    private var appDataSet: AppDataSet? = null
 
     /**
      * 单例获取用户数据集
@@ -24,5 +26,19 @@ object DataSetManager {
             }
         }
         return userDataSet!!
+    }
+
+    /**
+     * 单例获取应用数据集
+     */
+    fun getAppDataSet(): AppDataSet {
+        if (CheckUtil.isNull(appDataSet)) {
+            synchronized(DataSetManager::class.java) {
+                if (CheckUtil.isNull(appDataSet)) {
+                    appDataSet = AppDataSet()
+                }
+            }
+        }
+        return appDataSet!!
     }
 }

@@ -1,8 +1,10 @@
 package cn.jesse.gaea
 
+import android.arch.lifecycle.ViewModelProviders
 import cn.jesse.gaea.lib.base.router.ActivityRouter
 import cn.jesse.gaea.lib.base.ui.BaseActivity
 import cn.jesse.gaea.lib.common.constant.RemoteRouterDef
+import cn.jesse.gaea.lib.common.vm.UpdateViewModel
 import kotlinx.android.synthetic.main.host_activity_splash.*
 
 /**
@@ -21,6 +23,9 @@ class SplashActivity : BaseActivity() {
     }
 
     override fun onActivityCreated() {
+        val updateViewModel = ViewModelProviders.of(this).get(UpdateViewModel::class.java)
+        updateViewModel.checkBundleUpdate()
+
         tvSplash.postDelayed({
             ActivityRouter.startActivity(this, RemoteRouterDef.PluginMain.ACTIVITY_MAIN)
             finish()

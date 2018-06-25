@@ -11,7 +11,7 @@ class RemoteBundleInfoBean : Serializable {
     // bundle 名称
     var bundleName: String? = null
     // bundle 版本
-    var bundleVersion: String? = null
+    var bundleVersion = 0
     // bundle下载地址
     var bundleDownloadUrl: String? = null
     // bundle文件MD5

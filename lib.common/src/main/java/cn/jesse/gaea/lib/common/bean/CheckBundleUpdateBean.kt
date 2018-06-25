@@ -11,7 +11,7 @@ class CheckBundleUpdateBean : Serializable {
     // 宿主包名
     var hostName: String? = null
     // 宿主版本
-    var hostVersion: String? = null
+    var hostVersion = 0
     // 宿主补丁url
     var hostPatchUrl: String? = null
 

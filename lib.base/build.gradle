@@ -43,6 +43,7 @@ dependencies {
     compile project.libs['NLogger']
     compile project.libs['Toasty']
     compile project.libs['ZXing']
+    compile project.libs['dialog']
 
     annotationProcessor project.libs['lifecycle-compiler']
 }
