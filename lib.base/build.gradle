@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
@@ -46,5 +47,5 @@ dependencies {
     compile project.libs['dialog']
     compile project.libs['file-downloader']
 
-    annotationProcessor project.libs['lifecycle-compiler']
+    kapt project.libs['lifecycle-compiler']
 }

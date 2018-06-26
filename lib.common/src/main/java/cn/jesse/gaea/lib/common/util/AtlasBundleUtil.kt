@@ -6,9 +6,8 @@ import android.taobao.atlas.framework.Atlas
 import android.taobao.atlas.runtime.ActivityTaskMgr
 import android.taobao.atlas.runtime.ClassNotFoundInterceptorCallback
 import android.text.TextUtils
-import cn.jesse.gaea.lib.base.util.CheckUtil
-import cn.jesse.gaea.lib.base.util.ContextUtil
-import cn.jesse.gaea.lib.base.util.FileDownloaderUtil
+import cn.jesse.gaea.lib.base.util.*
+import cn.jesse.gaea.lib.common.bean.RemoteBundleInfoBean
 import cn.jesse.gaea.lib.common.dataset.DataSetManager
 import cn.jesse.nativelogger.NLogger
 import com.kongzue.dialog.v2.SelectDialog
@@ -37,7 +36,7 @@ object AtlasBundleUtil {
 
         //远程bundle
         val activity = ActivityTaskMgr.getInstance().peekTopActivity()
-        val remoteBundleFile = File(activity.externalCacheDir, "lib" + bundleName.replace(".", "_") + ".so")
+        val remoteBundleFile = File(WorkspaceUtil.getInstance().bundleFiles, "lib" + bundleName.replace(".", "_") + ".so")
 
         var path = ""
         if (remoteBundleFile.exists()) {
@@ -69,19 +68,27 @@ object AtlasBundleUtil {
         }
 
         SelectDialog.show(activity, "插件不存在", "是否下载插件 ?", "确定", { _, _ ->
-           downloadBundle(activity, bundleName, bundleInfo!!.bundleDownloadUrl!!)
+           downloadBundle(activity, bundleName, bundleInfo!!)
         }, "取消", { _, _ ->
             // unused
         })
     }
 
     /**
-     * 下载bundle
+     * 1. 下载bundle
+     * 2. 校验bundle md5
+     * 3. 校验bundle签名
      */
-    private fun downloadBundle(activity: Activity, bundleName: String, url: String) {
-        val remoteBundleFile = File(activity.externalCacheDir, "lib" + bundleName.replace(".", "_") + ".so")
+    private fun downloadBundle(activity: Activity, bundleName: String, bundleInfo: RemoteBundleInfoBean) {
+        val remoteBundleFile = File(WorkspaceUtil.getInstance().bundleFiles, "lib" + bundleName.replace(".", "_") + ".so")
         WaitDialog.show(activity, "下载中")
-        FileDownloaderUtil.download(url, remoteBundleFile.absolutePath, {
+        FileDownloaderUtil.download(bundleInfo.bundleDownloadUrl!!, remoteBundleFile.absolutePath, {
+
+            if (!MD5Util.compareFileMD5(remoteBundleFile.absolutePath, bundleInfo.bundleFileMD5!!)) {
+                TipDialog.show(activity, "安装失败", TipDialog.SHOW_TIME_SHORT, TipDialog.TYPE_FINISH)
+                return@download
+            }
+
             WaitDialog.show(activity, "安装中")
             val installStatus = installBundle(bundleName, remoteBundleFile.absolutePath)
             WaitDialog.dismiss()

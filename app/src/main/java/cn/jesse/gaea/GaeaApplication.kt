@@ -2,6 +2,7 @@ package cn.jesse.gaea
 
 import android.app.Application
 import android.taobao.atlas.framework.Atlas
+import cn.jesse.gaea.lib.common.util.WorkspaceUtil
 import cn.jesse.gaea.lib.base.util.ContextUtil
 import cn.jesse.gaea.lib.common.constant.Urls
 import cn.jesse.gaea.lib.common.util.AtlasBundleUtil
@@ -39,7 +40,7 @@ class GaeaApplication : Application() {
                 .tag("GAEA")
                 .loggerLevel(LoggerLevel.DEBUG)
                 .fileLogger(true)
-                .fileDirectory(applicationContext.filesDir.path + "/logs")
+                .fileDirectory(WorkspaceUtil.getInstance().rootLogs.absolutePath)
                 .fileFormatter(SimpleFormatter())
                 .expiredPeriod(3)
                 .catchException(true, { _, ex ->
