@@ -2,6 +2,7 @@
 
 ext {
 
+    applicationId = 'cn.jesse.gaea'
     targetSdkVersion = 27
     compileSdkVersion = 27
     minSdkVersion = 16
@@ -9,6 +10,9 @@ ext {
 
     versionCode = 1
     versionName = '1.0.0'
+
+    // 基准包版本
+    apVersion = getConfigValue('apVersion', null)
 
     libs = [
             'junit'               : 'junit:junit:4.12',
@@ -72,4 +76,23 @@ def addSplit(String origin, String bundle) {
         return bundle
     }
     return "${origin},${bundle}"
+}
+
+/**
+ * 获取命令行参数
+ *
+ * @param key 键
+ * @param defValue 默认值
+ * @return
+ */
+def getConfigValue(key, defValue) {
+    def val = System.getProperty(key)
+    if (null != val) {
+        return val
+    }
+    val = System.getenv(key)
+    if (null != val) {
+        return val
+    }
+    return defValue
 }

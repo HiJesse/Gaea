@@ -3,12 +3,17 @@ apply plugin: 'com.taobao.atlas'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+apply from: 'maven.gradle'
+
+version = project.versionName
+group = project.applicationId
+
 android {
     compileSdkVersion project.targetSdkVersion
     buildToolsVersion project.buildToolsVersion
 
     defaultConfig {
-        applicationId "cn.jesse.gaea"
+        applicationId project.applicationId
         minSdkVersion project.minSdkVersion
         targetSdkVersion project.targetSdkVersion
         versionCode project.versionCode
@@ -50,6 +55,15 @@ atlas {
     patchConfigs {
         debug {
             createTPatch true
+        }
+    }
+
+    buildTypes {
+        debug {
+            if (apVersion){
+                baseApDependency   "${project.applicationId}:AP-debug:${apVersion}@ap"
+                patchConfig    patchConfigs.debug
+            }
         }
     }
 
