@@ -28,6 +28,7 @@ dependencies {
     testCompile project.libs['junit']
     androidTestCompile project.libs['espresso']
     androidTestCompile project.libs['runner']
+    compile project.libs["atlas-update"]
     providedCompile project(':lib.base')
     providedCompile project(':lib.network')
 }

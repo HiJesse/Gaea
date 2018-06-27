@@ -9,10 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import cn.jesse.gaea.lib.base.router.ActivityRouter
 import cn.jesse.gaea.lib.base.ui.BaseFragment
+import cn.jesse.gaea.lib.base.util.ContextUtil
 import cn.jesse.gaea.lib.common.constant.RemoteRouterDef
+import cn.jesse.gaea.lib.common.util.AtlasUpdateUtil
 import cn.jesse.gaea.plugin.main.R
 import cn.jesse.gaea.plugin.main.constant.PluginDef
 import cn.jesse.nativelogger.NLogger
+import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.main_fragment_main.*
 
 /**
@@ -35,6 +38,18 @@ class MainFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         btnLogin.setOnClickListener {
             ActivityRouter.startActivity(this, RemoteRouterDef.PluginUser.ACTIVITY_LOGIN, RemoteRouterDef.PluginUser.CODE_LOGIN_STATUS)
+        }
+
+        btnLoadPatch.setOnClickListener {
+            AtlasUpdateUtil.loadTPatch { status ->
+                var msg = "加载失败, 请查看日志"
+
+                if (status) {
+                    msg = "加载成功, 重启生效"
+                }
+
+                Toasty.normal(ContextUtil.getApplicationContext(), msg).show()
+            }
         }
 
         showLoginStatus()

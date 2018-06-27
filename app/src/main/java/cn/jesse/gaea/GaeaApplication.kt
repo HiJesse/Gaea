@@ -5,7 +5,7 @@ import android.taobao.atlas.framework.Atlas
 import cn.jesse.gaea.lib.common.util.WorkspaceUtil
 import cn.jesse.gaea.lib.base.util.ContextUtil
 import cn.jesse.gaea.lib.common.constant.Urls
-import cn.jesse.gaea.lib.common.util.AtlasBundleUtil
+import cn.jesse.gaea.lib.common.util.AtlasUpdateUtil
 import cn.jesse.gaea.lib.network.HttpEngine
 import cn.jesse.nativelogger.NLogger
 import cn.jesse.nativelogger.NLoggerConfig
@@ -61,6 +61,6 @@ class GaeaApplication : Application() {
         FileDownloader.setupOnApplicationOnCreate(this)
 
         // 设置加载远程bundle回调
-        Atlas.getInstance().setClassNotFoundInterceptorCallback(AtlasBundleUtil.classNotFoundInterceptorCallback)
+        Atlas.getInstance().setClassNotFoundInterceptorCallback(AtlasUpdateUtil.classNotFoundInterceptorCallback)
     }
 }

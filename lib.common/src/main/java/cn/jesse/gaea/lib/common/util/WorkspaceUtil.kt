@@ -25,12 +25,16 @@ class WorkspaceUtil {
     // 文件目录-bundle
     lateinit var bundleFiles: File
         private set
+    // 文件目录-patch
+    lateinit var patchFiles: File
+        private set
 
     private val DIR_IMAGES = "rootImages"
     private val DIR_LOGS = "rootLogs"
     private val DIR_FILES = "rootFiles"
 
     private val DIR_SUB_BUNDLES = "bundles"
+    private val DIR_SUB_PATCHES = "patches"
 
     init {
         initWorkspace()
@@ -61,6 +65,7 @@ class WorkspaceUtil {
         rootFiles = makeDir(root, DIR_FILES)
 
         bundleFiles = makeDir(rootFiles, DIR_SUB_BUNDLES)
+        patchFiles = makeDir(rootFiles, DIR_SUB_PATCHES)
     }
 
     private fun makeDir(root: File, child: String): File {

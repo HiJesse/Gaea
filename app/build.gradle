@@ -60,9 +60,9 @@ atlas {
 
     buildTypes {
         debug {
-            if (apVersion){
-                baseApDependency   "${project.applicationId}:AP-debug:${apVersion}@ap"
-                patchConfig    patchConfigs.debug
+            if (apVersion) {
+                baseApDependency "${project.applicationId}:AP-debug:${apVersion}@ap"
+                patchConfig patchConfigs.debug
             }
         }
     }
@@ -71,7 +71,6 @@ atlas {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project.libs["atlas-update"]
     compile project(':lib.base')
     compile project(':lib.common')
     compile project(':lib.network')

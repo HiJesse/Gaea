@@ -9,11 +9,17 @@ import android.text.TextUtils
 import cn.jesse.gaea.lib.base.util.*
 import cn.jesse.gaea.lib.common.bean.RemoteBundleInfoBean
 import cn.jesse.gaea.lib.common.dataset.DataSetManager
+import cn.jesse.gaea.lib.network.transformer.IOMainThreadTransformer
 import cn.jesse.nativelogger.NLogger
+import com.google.gson.Gson
 import com.kongzue.dialog.v2.SelectDialog
 import com.kongzue.dialog.v2.TipDialog
 import com.kongzue.dialog.v2.WaitDialog
+import com.taobao.atlas.dex.util.FileUtils
+import com.taobao.atlas.update.AtlasUpdater
+import com.taobao.atlas.update.model.UpdateInfo
 import es.dmoral.toasty.Toasty
+import io.reactivex.Observable
 import org.osgi.framework.BundleException
 import java.io.File
 
@@ -22,7 +28,7 @@ import java.io.File
  *
  * @author Jesse
  */
-object AtlasBundleUtil {
+object AtlasUpdateUtil {
     private val TAG = "AtlasBundleUtil"
 
     // class not fount 回调
@@ -43,7 +49,7 @@ object AtlasBundleUtil {
             path = remoteBundleFile.absolutePath
         } else {
             showDownloadBundleDialog(activity, bundleName)
-            NLogger.e("插件不存在，请确定 : ${remoteBundleFile.absolutePath}")
+            NLogger.e("classNotFoundInterceptorCallback 插件不存在，请确定 : ${remoteBundleFile.absolutePath}")
             return@ClassNotFoundInterceptorCallback intent
         }
 
@@ -58,6 +64,36 @@ object AtlasBundleUtil {
     }
 
     /**
+     * 加载patch并安装 (安装过程会比较慢, 一定不要在UI线程操作)
+     */
+    private fun loadTPatch(): Boolean {
+        val context = ContextUtil.getApplicationContext()
+        val patchWorkSpace = WorkspaceUtil.getInstance().patchFiles
+
+        val versionName = context.packageManager.getPackageInfo(AppUtil.getPackageName(context), 0).versionName
+        val updateInfo = File(patchWorkSpace, "update-$versionName.json")
+
+        if (!updateInfo.exists()) {
+            NLogger.e(TAG, "loadTPatch update json file is not exist")
+            return false
+        }
+
+        try {
+            val jsonStr = String(FileUtils.readFile(updateInfo))
+            val info = Gson().fromJson(jsonStr, UpdateInfo::class.java)
+
+            val patchFile = File(patchWorkSpace, "patch-" + info.updateVersion + "@" + info.baseVersion + ".tpatch")
+            AtlasUpdater.update(info, patchFile)
+            NLogger.i(TAG, "loadTPatch patch succeed")
+            return true
+        } catch (e: Exception) {
+            NLogger.e(TAG, "loadTPatch ${e.message}")
+        }
+
+        return false
+    }
+
+    /**
      * 显示是否下载插件对话框
      */
     private fun showDownloadBundleDialog(activity: Activity, bundleName: String) {
@@ -68,7 +104,7 @@ object AtlasBundleUtil {
         }
 
         SelectDialog.show(activity, "插件不存在", "是否下载插件 ?", "确定", { _, _ ->
-           downloadBundle(activity, bundleName, bundleInfo!!)
+            downloadBundle(activity, bundleName, bundleInfo!!)
         }, "取消", { _, _ ->
             // unused
         })
@@ -116,9 +152,23 @@ object AtlasBundleUtil {
             succeed = true
         } catch (e: BundleException) {
             Toasty.normal(ContextUtil.getApplicationContext(), "插件安装失败 : ${e.message}").show()
-            NLogger.e(TAG, "插件安装失败, : ${e.message}")
+            NLogger.e(TAG, "installBundle 插件安装失败, : ${e.message}")
         }
         return succeed
+    }
+
+    /**
+     * 加载T patch
+     *
+     * @param listener 加载成功失败 UI线程回调
+     */
+    fun loadTPatch(listener: ((status: Boolean) -> Unit)) {
+        Observable.just(true)
+                .map {
+                    AtlasUpdateUtil.loadTPatch()
+                }
+                .compose(IOMainThreadTransformer())
+                .subscribe(listener)
     }
 
 }
