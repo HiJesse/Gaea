@@ -3,6 +3,10 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.taobao.atlas'
 
+// unitTag
+version = '1.0.0'
+group = project.applicationId
+
 android {
     compileSdkVersion project.targetSdkVersion
     buildToolsVersion project.buildToolsVersion
@@ -11,7 +15,7 @@ android {
         minSdkVersion project.minSdkVersion
         targetSdkVersion project.targetSdkVersion
         versionCode 1
-        versionName '1.0.0'
+        versionName version
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
