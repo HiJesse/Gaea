@@ -22,6 +22,7 @@ object SPDef {
      */
     object App {
         val KEY_HOST_VERSION = "key_host_version"
+        val KEY_PATCH_INFO = "key_patch_info"
         val KEY_BUNDLES_INFO = "key_bundles_info"
     }
 }

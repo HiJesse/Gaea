@@ -3,6 +3,9 @@ package cn.jesse.gaea.lib.base.manager
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
+import cn.jesse.gaea.lib.base.util.CheckUtil
+import cn.jesse.nativelogger.NLogger
+import com.google.gson.Gson
 
 /**
  * shared preference 管理类, 提供基础参数读写
@@ -10,7 +13,9 @@ import android.content.SharedPreferences
  * @author Jesse
  */
 class SharedPreferenceManager(context: Context, spName: String, spMode: Int) {
+    private val TAG = "SharedPreferenceManager"
     private var sharedPreference: SharedPreferences = context.getSharedPreferences(spName, spMode)
+    private val gson = Gson()
 
     fun setFlag(key: String, value: String?) {
         sharedPreference.edit().putString(key, value).apply()
@@ -26,6 +31,10 @@ class SharedPreferenceManager(context: Context, spName: String, spMode: Int) {
 
     fun setFlag(key: String, value: Long) {
         sharedPreference.edit().putLong(key, value).apply()
+    }
+
+    fun setJsonFlag(key: String, json: Any?) {
+        setFlag(key, gson.toJson(json))
     }
 
     fun containsFlag(key: String): Boolean {
@@ -62,6 +71,26 @@ class SharedPreferenceManager(context: Context, spName: String, spMode: Int) {
 
     fun getStringFlag(key: String, defValue: String?): String {
         return sharedPreference.getString(key, defValue)
+    }
+
+    /**
+     * 根据key 直接获取json字符串反序列化之后的对象
+     */
+    fun <T>getJsonObjectFlag(key: String, clazz: Class<T>): T? {
+        val source = getStringFlag(key)
+        if (CheckUtil.isNull(source)) {
+            return null
+        }
+
+        var jsonObject: T? = null
+
+        try {
+            jsonObject = gson.fromJson(source, clazz)
+        } catch (e: Exception) {
+            NLogger.e(TAG, "getJsonObjectFlag ${e.message}")
+        }
+
+        return jsonObject
     }
 
     fun clearFlag(key: String) {

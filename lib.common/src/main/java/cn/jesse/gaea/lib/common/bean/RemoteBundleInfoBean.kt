@@ -16,4 +16,6 @@ class RemoteBundleInfoBean : Serializable {
     var bundleDownloadUrl: String? = null
     // bundle文件MD5
     var bundleFileMD5: String? = null
+    // bundle是否安装
+    var bundleInstalled = false
 }

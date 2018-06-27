@@ -1,6 +1,7 @@
 package cn.jesse.gaea.lib.common.dataset
 
 import cn.jesse.gaea.lib.base.util.CheckUtil
+import cn.jesse.gaea.lib.common.bean.PatchBean
 import cn.jesse.gaea.lib.common.bean.RemoteBundleInfoBean
 import cn.jesse.gaea.lib.common.constant.SPDef
 import cn.jesse.gaea.lib.common.util.SPUtil
@@ -35,6 +36,22 @@ class AppDataSet {
             appSP.setFlag(SPDef.App.KEY_HOST_VERSION, field)
         }
 
+    // t patch 信息
+    var patchInfo: PatchBean? = null
+        get() {
+            if (CheckUtil.isNotNull(field)) {
+                return field
+            }
+
+            field = appSP.getJsonObjectFlag(SPDef.App.KEY_PATCH_INFO, PatchBean::class.java)
+
+            return field
+        }
+        set(value) {
+            field = value
+            appSP.setJsonFlag(SPDef.App.KEY_PATCH_INFO, field)
+        }
+
     // 远程bundles 信息
     var bundlesInfo: List<RemoteBundleInfoBean>? = null
         get() {
@@ -64,8 +81,7 @@ class AppDataSet {
         }
         set(value) {
             field = value
-
-            appSP.setFlag(SPDef.App.KEY_BUNDLES_INFO, Gson().toJson(field))
+            appSP.setJsonFlag(SPDef.App.KEY_BUNDLES_INFO, field)
         }
 
     /**

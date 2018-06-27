@@ -1,6 +1,6 @@
 package cn.jesse.gaea.lib.common.api
 
-import cn.jesse.gaea.lib.common.bean.CheckBundleUpdateBean
+import cn.jesse.gaea.lib.common.bean.CheckUpdateBean
 import cn.jesse.gaea.lib.network.base.BaseResponse
 import io.reactivex.Observable
 import retrofit2.http.GET
@@ -12,6 +12,6 @@ import retrofit2.http.GET
  */
 interface UpdateService {
 
-    @GET("/gaea/update/checkBundle")
-    fun checkBundle(): Observable<BaseResponse<CheckBundleUpdateBean>>
+    @GET("/gaea/update/checkUpdate")
+    fun checkUpdate(): Observable<BaseResponse<CheckUpdateBean>>
 }

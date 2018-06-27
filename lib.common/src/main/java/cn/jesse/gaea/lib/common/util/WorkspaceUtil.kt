@@ -52,6 +52,19 @@ class WorkspaceUtil {
     }
 
     /**
+     * 清除某一个具体的工作空间
+     *
+     * @param target root | rootLogs | rootImages |...
+     */
+    fun clear(target: File) {
+        if (!target.exists()) {
+            return
+        }
+        target.delete()
+        initWorkspace()
+    }
+
+    /**
      * 初始化工作空间
      */
     private fun initWorkspace() {
