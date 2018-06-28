@@ -9,7 +9,7 @@ ext {
     buildToolsVersion = '27.0.3'
 
     versionCode = 1
-    versionName = '1.0.0'
+    versionName = '1.0.1'
 
     // 基准包版本
     apVersion = getConfigValue('apVersion', null)

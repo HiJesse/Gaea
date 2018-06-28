@@ -36,7 +36,7 @@ class UserFragment : BaseFragment(), IRemote {
             ActivityRouter.startActivity(this, RemoteRouterDef.PluginUser.ACTIVITY_LOGIN)
         }
 
-        tvVersion.text = "版本号: ${AppUtil.getVersionName(this.context)}"
+        tvVersion.text = "(patch_user)版本号: ${AppUtil.getVersionName(this.context)}"
     }
 
     override fun call(commandName: String?, args: Bundle?, callback: IRemoteTransactor.IResponse?): Bundle {
