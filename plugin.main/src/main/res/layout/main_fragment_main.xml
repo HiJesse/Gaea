@@ -41,4 +41,12 @@
         android:layout_marginTop="10dp"
         android:text="@string/main_fragment_load_patch" />
 
+    <Button
+        android:id="@+id/btnUninstallScanner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:text="@string/main_fragment_uninstall_scanner" />
+
 </LinearLayout>

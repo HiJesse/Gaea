@@ -18,7 +18,6 @@ import cn.jesse.gaea.lib.common.vm.UpdateViewModel
 import cn.jesse.gaea.plugin.main.R
 import cn.jesse.gaea.plugin.main.constant.PluginDef
 import cn.jesse.nativelogger.NLogger
-import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.main_fragment_main.*
 
 /**
@@ -42,11 +41,15 @@ class MainFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         updateViewModel = ViewModelProviders.of(this).get(UpdateViewModel::class.java)
 
+        showLoginStatus()
+
         btnLogin.setOnClickListener {
             ActivityRouter.startActivity(this, RemoteRouterDef.PluginUser.ACTIVITY_LOGIN, RemoteRouterDef.PluginUser.CODE_LOGIN_STATUS)
         }
 
-        showLoginStatus()
+        btnUninstallScanner.setOnClickListener {
+            AtlasUpdateUtil.uninstallBundle(RemoteRouterDef.PluginScanner.BASE)
+        }
 
         if (!"1.0.0".equals(AppUtil.getVersionName(ContextUtil.getApplicationContext()))) {
             btnLoadPatch.visibility = View.GONE

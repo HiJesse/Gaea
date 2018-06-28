@@ -3,10 +3,14 @@ package cn.jesse.gaea.lib.common.util
 import android.app.Activity
 import android.taobao.atlas.bundleInfo.AtlasBundleInfoManager
 import android.taobao.atlas.framework.Atlas
+import android.taobao.atlas.framework.Framework
 import android.taobao.atlas.runtime.ActivityTaskMgr
 import android.taobao.atlas.runtime.ClassNotFoundInterceptorCallback
 import android.text.TextUtils
-import cn.jesse.gaea.lib.base.util.*
+import cn.jesse.gaea.lib.base.util.CheckUtil
+import cn.jesse.gaea.lib.base.util.ContextUtil
+import cn.jesse.gaea.lib.base.util.FileDownloaderUtil
+import cn.jesse.gaea.lib.base.util.MD5Util
 import cn.jesse.gaea.lib.common.bean.RemoteBundleInfoBean
 import cn.jesse.gaea.lib.common.dataset.DataSetManager
 import cn.jesse.gaea.lib.network.transformer.IOMainThreadTransformer
@@ -61,6 +65,55 @@ object AtlasUpdateUtil {
         activity.startActivities(arrayOf(intent))
 
         intent
+    }
+
+    /**
+     * 安装bundle
+     *
+     * @param bundleName 要安装的bundle名称
+     * @param path bundle物理文件路径
+     */
+    fun installBundle(bundleName: String, path: String): Boolean {
+        var succeed = false
+        try {
+            Atlas.getInstance().installBundle(bundleName, File(path))
+            succeed = true
+        } catch (e: BundleException) {
+            Toasty.normal(ContextUtil.getApplicationContext(), "插件安装失败 : ${e.message}").show()
+            NLogger.e(TAG, "installBundle 插件安装失败, : ${e.message}")
+        }
+        return succeed
+    }
+
+    /**
+     * 卸载bundle
+     *
+     * @param bundleName 要卸载的bundle名称
+     */
+    fun uninstallBundle(bundleName: String) {
+        if (CheckUtil.isNull(Framework.getBundle(bundleName))) {
+            NLogger.i(TAG, "uninstallBundle $bundleName is not exist")
+            return
+        }
+
+        Atlas.getInstance().uninstallBundle(bundleName)
+    }
+
+    /**
+     * 加载T patch
+     *
+     * @param jsonFilePath 配置文件路径
+     * @param patchFilePath 补丁文件路径
+     * @param patchMD5 补丁文件MD5
+     * @param listener 加载成功失败 UI线程回调
+     */
+    fun loadTPatch(jsonFilePath: String, patchFilePath: String, patchMD5: String, listener: ((status: Boolean) -> Unit)) {
+        Observable.just(true)
+                .map {
+                    AtlasUpdateUtil.loadTPatch(jsonFilePath, patchFilePath, patchMD5)
+                }
+                .compose(IOMainThreadTransformer())
+                .subscribe(listener)
     }
 
     /**
@@ -146,41 +199,6 @@ object AtlasUpdateUtil {
             WaitDialog.dismiss()
             TipDialog.show(activity, "下载失败", TipDialog.SHOW_TIME_SHORT, TipDialog.TYPE_FINISH)
         })
-    }
-
-    /**
-     * 安装bundle
-     *
-     * @param bundleName 要安装的bundle名称
-     * @param path bundle物理文件路径
-     */
-    fun installBundle(bundleName: String, path: String): Boolean {
-        var succeed = false
-        try {
-            Atlas.getInstance().installBundle(bundleName, File(path))
-            succeed = true
-        } catch (e: BundleException) {
-            Toasty.normal(ContextUtil.getApplicationContext(), "插件安装失败 : ${e.message}").show()
-            NLogger.e(TAG, "installBundle 插件安装失败, : ${e.message}")
-        }
-        return succeed
-    }
-
-    /**
-     * 加载T patch
-     *
-     * @param jsonFilePath 配置文件路径
-     * @param patchFilePath 补丁文件路径
-     * @param patchMD5 补丁文件MD5
-     * @param listener 加载成功失败 UI线程回调
-     */
-    fun loadTPatch(jsonFilePath: String, patchFilePath: String, patchMD5: String, listener: ((status: Boolean) -> Unit)) {
-        Observable.just(true)
-                .map {
-                    AtlasUpdateUtil.loadTPatch(jsonFilePath, patchFilePath, patchMD5)
-                }
-                .compose(IOMainThreadTransformer())
-                .subscribe(listener)
     }
 
 }

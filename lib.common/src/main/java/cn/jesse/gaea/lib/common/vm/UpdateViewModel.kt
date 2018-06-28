@@ -47,7 +47,10 @@ class UpdateViewModel : BaseViewModel() {
                         Mode.PATCH_BUNDLE -> {
                             extractPatch(data)
                             DataSetManager.getAppDataSet().bundlesInfo = data.bundles
-                        } else -> {}
+                        }
+                        else -> {
+                            // unused
+                        }
                     }
 
                     updateResult.value = DataStatusResult(data)
