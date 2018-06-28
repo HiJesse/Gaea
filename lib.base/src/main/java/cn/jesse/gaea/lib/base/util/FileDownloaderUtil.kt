@@ -1,11 +1,11 @@
 package cn.jesse.gaea.lib.base.util
 
-import android.text.TextUtils
 import cn.jesse.nativelogger.NLogger
 import com.liulishuo.filedownloader.BaseDownloadTask
 import com.liulishuo.filedownloader.FileDownloadListener
 import com.liulishuo.filedownloader.FileDownloadQueueSet
 import com.liulishuo.filedownloader.FileDownloader
+import java.io.File
 
 /**
  * 文件下载工具类
@@ -30,7 +30,7 @@ object FileDownloaderUtil {
      * @param succeedListener 成功回调
      * @param errorListener 错误回调
      */
-    fun download(urls: Array<String?>, path: String, succeedListener: (() -> Unit)?, errorListener: (() -> Unit)?) {
+    fun download(urls: Array<String>, path: String, succeedListener: ((task: BaseDownloadTask?) -> Unit)?, errorListener: (() -> Unit)?) {
         if (urls.isEmpty()) {
             return
         }
@@ -47,7 +47,7 @@ object FileDownloaderUtil {
             override fun completed(task: BaseDownloadTask?) {
                 NLogger.d(TAG, "download completed ${task?.url} $path")
                 if (CheckUtil.isNotNull(succeedListener)) {
-                    succeedListener!!.invoke()
+                    succeedListener!!.invoke(task)
                 }
             }
 
@@ -70,10 +70,8 @@ object FileDownloaderUtil {
         val tasks = ArrayList<BaseDownloadTask>()
 
         for (url in urls) {
-            if (TextUtils.isEmpty(url)) {
-                continue
-            }
-            tasks.add(FileDownloader.getImpl().create(url).setPath(path, true).setTag(urls.indexOf(url)))
+            val filePath = "$path${File.separator}${StringUtil.getFileNameFromUrl(url)}"
+            tasks.add(FileDownloader.getImpl().create(url).setPath(filePath).setTag(urls.indexOf(url)))
         }
         queueSet.disableCallbackProgressTimes()
         queueSet.setAutoRetryTimes(1)

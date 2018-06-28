@@ -1,6 +1,7 @@
 package cn.jesse.gaea.plugin.main.ui.fragment
 
 import android.app.Activity
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -9,9 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import cn.jesse.gaea.lib.base.router.ActivityRouter
 import cn.jesse.gaea.lib.base.ui.BaseFragment
+import cn.jesse.gaea.lib.base.util.AppUtil
 import cn.jesse.gaea.lib.base.util.ContextUtil
 import cn.jesse.gaea.lib.common.constant.RemoteRouterDef
 import cn.jesse.gaea.lib.common.util.AtlasUpdateUtil
+import cn.jesse.gaea.lib.common.vm.UpdateViewModel
 import cn.jesse.gaea.plugin.main.R
 import cn.jesse.gaea.plugin.main.constant.PluginDef
 import cn.jesse.nativelogger.NLogger
@@ -25,6 +28,7 @@ import kotlinx.android.synthetic.main.main_fragment_main.*
  */
 class MainFragment : BaseFragment() {
     private var loginStatus = false
+    private lateinit var updateViewModel: UpdateViewModel
 
     override fun getLogTag(): String {
         return "${PluginDef.TAG}.MainFragment"
@@ -36,23 +40,22 @@ class MainFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        updateViewModel = ViewModelProviders.of(this).get(UpdateViewModel::class.java)
+
         btnLogin.setOnClickListener {
             ActivityRouter.startActivity(this, RemoteRouterDef.PluginUser.ACTIVITY_LOGIN, RemoteRouterDef.PluginUser.CODE_LOGIN_STATUS)
         }
 
-        btnLoadPatch.setOnClickListener {
-            AtlasUpdateUtil.loadTPatch { status ->
-                var msg = "加载失败, 请查看日志"
+        showLoginStatus()
 
-                if (status) {
-                    msg = "加载成功, 重启生效"
-                }
-
-                Toasty.normal(ContextUtil.getApplicationContext(), msg).show()
-            }
+        if (!"1.0.0".equals(AppUtil.getVersionName(ContextUtil.getApplicationContext()))) {
+            btnLoadPatch.visibility = View.GONE
+            return
         }
 
-        showLoginStatus()
+        btnLoadPatch.setOnClickListener {
+            updateViewModel.checkUpdate(UpdateViewModel.Mode.PATCH)
+        }
     }
 
     /**

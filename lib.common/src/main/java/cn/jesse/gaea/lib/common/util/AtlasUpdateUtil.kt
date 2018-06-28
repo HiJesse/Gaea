@@ -65,24 +65,33 @@ object AtlasUpdateUtil {
 
     /**
      * 加载patch并安装 (安装过程会比较慢, 一定不要在UI线程操作)
+     *
+     * @param jsonFilePath 配置文件路径
+     * @param patchFilePath 补丁文件路径
+     * @param patchMD5 补丁文件MD5
      */
-    private fun loadTPatch(): Boolean {
-        val context = ContextUtil.getApplicationContext()
-        val patchWorkSpace = WorkspaceUtil.getInstance().patchFiles
-
-        val versionName = context.packageManager.getPackageInfo(AppUtil.getPackageName(context), 0).versionName
-        val updateInfo = File(patchWorkSpace, "update-$versionName.json")
+    private fun loadTPatch(jsonFilePath: String, patchFilePath: String, patchMD5: String): Boolean {
+        val updateInfo = File(jsonFilePath)
+        val patchFile = File(patchFilePath)
 
         if (!updateInfo.exists()) {
             NLogger.e(TAG, "loadTPatch update json file is not exist")
             return false
         }
 
+        if (!patchFile.exists()) {
+            NLogger.e(TAG, "loadTPatch update patch file is not exist")
+            return false
+        }
+
+        if (!MD5Util.compareFileMD5(patchFilePath, patchMD5)) {
+            NLogger.e(TAG, "loadTPatch patch file MD5 is not match")
+            return false
+        }
+
         try {
             val jsonStr = String(FileUtils.readFile(updateInfo))
             val info = Gson().fromJson(jsonStr, UpdateInfo::class.java)
-
-            val patchFile = File(patchWorkSpace, "patch-" + info.updateVersion + "@" + info.baseVersion + ".tpatch")
             AtlasUpdater.update(info, patchFile)
             NLogger.i(TAG, "loadTPatch patch succeed")
             return true
@@ -160,12 +169,15 @@ object AtlasUpdateUtil {
     /**
      * 加载T patch
      *
+     * @param jsonFilePath 配置文件路径
+     * @param patchFilePath 补丁文件路径
+     * @param patchMD5 补丁文件MD5
      * @param listener 加载成功失败 UI线程回调
      */
-    fun loadTPatch(listener: ((status: Boolean) -> Unit)) {
+    fun loadTPatch(jsonFilePath: String, patchFilePath: String, patchMD5: String, listener: ((status: Boolean) -> Unit)) {
         Observable.just(true)
                 .map {
-                    AtlasUpdateUtil.loadTPatch()
+                    AtlasUpdateUtil.loadTPatch(jsonFilePath, patchFilePath, patchMD5)
                 }
                 .compose(IOMainThreadTransformer())
                 .subscribe(listener)

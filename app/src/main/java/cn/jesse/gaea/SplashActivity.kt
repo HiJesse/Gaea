@@ -24,7 +24,7 @@ class SplashActivity : BaseActivity() {
 
     override fun onActivityCreated() {
         val updateViewModel = ViewModelProviders.of(this).get(UpdateViewModel::class.java)
-        updateViewModel.checkBundleUpdate()
+        updateViewModel.checkUpdate(UpdateViewModel.Mode.BUNDLE)
 
         tvSplash.postDelayed({
             ActivityRouter.startActivity(this, RemoteRouterDef.PluginMain.ACTIVITY_MAIN)

@@ -124,4 +124,14 @@ object StringUtil {
         }
         return String(chars)
     }
+
+    /**
+     * 从url中获取文件名称
+     *
+     * @param url url地址
+     */
+    fun getFileNameFromUrl(url: String): String {
+        val array = url.split("/")
+        return array.last()
+    }
 }
