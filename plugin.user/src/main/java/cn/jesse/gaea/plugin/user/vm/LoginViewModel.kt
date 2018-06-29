@@ -20,7 +20,7 @@ class LoginViewModel : BaseViewModel() {
 
     fun login() {
 
-        HttpEngine.getInstance()
+        val loginRequest = HttpEngine.getInstance()
                 .create(UserService::class.java)
                 .login()
                 .compose(IOMainThreadTransformer())
@@ -32,5 +32,6 @@ class LoginViewModel : BaseViewModel() {
                 }, {e ->
                     loginResult.value = DataStatusResult(false, "${e.message}")
                 })
+        addCancelableRequest(loginRequest)
     }
 }

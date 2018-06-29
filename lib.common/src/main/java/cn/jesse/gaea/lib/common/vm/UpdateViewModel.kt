@@ -33,7 +33,7 @@ class UpdateViewModel : BaseViewModel() {
      */
     fun checkUpdate(mode: Mode) {
 
-        HttpEngine.getInstance()
+        val updateRequest = HttpEngine.getInstance()
                 .create(UpdateService::class.java)
                 .checkUpdate()
                 .compose(IOMainThreadTransformer())
@@ -59,6 +59,7 @@ class UpdateViewModel : BaseViewModel() {
                     NLogger.e(TAG, "checkUpdate ${e.message}")
                     updateResult.value = DataStatusResult(false, "${e.message}")
                 })
+        addCancelableRequest(updateRequest)
     }
 
     /**
