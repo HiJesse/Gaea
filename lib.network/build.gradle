@@ -29,4 +29,5 @@ dependencies {
     androidTestCompile project.libs['espresso']
     androidTestCompile project.libs['runner']
     providedCompile project(':lib.base')
+    compile project.libs['http-log']
 }

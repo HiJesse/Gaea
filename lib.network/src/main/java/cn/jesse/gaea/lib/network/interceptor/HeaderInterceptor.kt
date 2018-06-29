@@ -1,4 +1,4 @@
-package cn.jesse.gaea.lib.network.base
+package cn.jesse.gaea.lib.network.interceptor
 
 import cn.jesse.gaea.lib.base.util.CheckUtil
 import okhttp3.Interceptor
@@ -10,7 +10,7 @@ import java.io.IOException
  *
  * @author Jesse
  */
-class BaseInterceptor(private val headers: Map<String, String>?) : Interceptor {
+class HeaderInterceptor(private val headers: Map<String, String>?) : Interceptor {
 
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
