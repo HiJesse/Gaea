@@ -31,6 +31,7 @@ ext {
             'retrofit'            : 'com.squareup.retrofit2:retrofit:2.4.0',
             'retrofit-gson'       : 'com.squareup.retrofit2:converter-gson:2.4.0',
             'retrofit-rxjava'     : 'com.squareup.retrofit2:adapter-rxjava2:2.4.0',
+            'http-log'            : 'com.squareup.okhttp3:logging-interceptor:3.10.0',
             'rxjava'              : 'io.reactivex.rxjava2:rxjava:2.1.14',
             'rxandroid'           : 'io.reactivex.rxjava2:rxandroid:2.0.2',
             'NLogger'             : 'com.github.hijesse:android-logger:2.5.0',

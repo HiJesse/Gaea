@@ -2,12 +2,14 @@ package cn.jesse.gaea.lib.network
 
 import android.annotation.SuppressLint
 import cn.jesse.gaea.lib.base.exception.UnsupportedOperationException
+import cn.jesse.gaea.lib.base.util.AppUtil
 import cn.jesse.gaea.lib.base.util.CheckUtil
 import cn.jesse.gaea.lib.base.util.ContextUtil
 import cn.jesse.gaea.lib.network.base.BaseApiService
-import cn.jesse.gaea.lib.network.base.BaseInterceptor
+import cn.jesse.gaea.lib.network.interceptor.HeaderInterceptor
 import cn.jesse.gaea.lib.network.exception.HttpEngineInitException
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -64,11 +66,18 @@ class HttpEngine {
             throw HttpEngineInitException("base url is null")
         }
 
-        okHttpClient = OkHttpClient().newBuilder()
+        val builder = OkHttpClient().newBuilder()
                 .connectTimeout(connectionTimeout, timeoutUnit)
                 .writeTimeout(writeTimeout, timeoutUnit)
-                .addInterceptor(BaseInterceptor(headers))
-                .build()
+                .addInterceptor(HeaderInterceptor(headers))
+
+        if (AppUtil.isDebugVersion(context)) {
+            val httpLogger = HttpLoggingInterceptor()
+            httpLogger.level = HttpLoggingInterceptor.Level.BODY
+            builder.addInterceptor(httpLogger)
+        }
+
+        okHttpClient = builder.build()
 
         retrofit = Retrofit.Builder()
                 .client(okHttpClient)
