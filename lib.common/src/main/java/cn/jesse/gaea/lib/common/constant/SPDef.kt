@@ -24,5 +24,7 @@ object SPDef {
         val KEY_HOST_VERSION = "key_host_version"
         val KEY_PATCH_INFO = "key_patch_info"
         val KEY_BUNDLES_INFO = "key_bundles_info"
+
+        val KEY_PATTERN_LOCK = "key_pattern_lock"
     }
 }

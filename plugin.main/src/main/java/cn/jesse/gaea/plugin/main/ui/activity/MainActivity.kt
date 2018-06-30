@@ -4,6 +4,7 @@ import android.support.v4.view.ViewPager
 import android.taobao.atlas.remote.RemoteFactory
 import android.taobao.atlas.remote.fragment.RemoteFragment
 import android.view.MenuItem
+import cn.jesse.gaea.lib.base.router.ActivityRouter
 import cn.jesse.gaea.lib.base.ui.BaseActivity
 import cn.jesse.gaea.lib.base.util.AppUtil
 import cn.jesse.gaea.lib.base.util.AtlasRemoteUtil
@@ -35,6 +36,8 @@ class MainActivity : BaseActivity(), RemoteFactory.OnRemoteStateListener<RemoteF
     }
 
     override fun onActivityCreated() {
+        ActivityRouter.startActivity(this, RemoteRouterDef.LibCommon.ACTIVITY_PATTERN_LOCK)
+
         // 设置退出app 监听
         DoubleExitUtil.getInstance().listener = {
             NLogger.d(mTag, "exit app")

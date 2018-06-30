@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.PatternLockActivity">
+
+    <com.andrognito.patternlockview.PatternLockView
+        android:id="@+id/plvLock"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:aspectRatio="square"
+        app:aspectRatioEnabled="true"
+        app:correctStateColor="@color/colorPrimary"
+        app:dotAnimationDuration="200"
+        app:dotCount="3"
+        app:dotNormalSize="12dp"
+        app:dotSelectedSize="24dp"
+        app:normalStateColor="@color/gray_press_dark"
+        app:pathEndAnimationDuration="100"
+        app:pathWidth="4dp"
+        app:wrongStateColor="@color/pomegranate" />
+
+</LinearLayout>

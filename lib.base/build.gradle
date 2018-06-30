@@ -47,5 +47,8 @@ dependencies {
     compile project.libs['dialog']
     compile project.libs['file-downloader']
 
+    compile project.libs['lock-view']
+    compile project.libs['lock-view-rx']
+
     kapt project.libs['lifecycle-compiler']
 }

@@ -5,6 +5,16 @@ package cn.jesse.gaea.lib.common.constant
  */
 object RemoteRouterDef {
 
+    object LibCommon {
+        // base
+        val BASE = "${CommonPackageDef.MAIN}.${CommonPackageDef.LIB}.${CommonPackageDef.PackageLib.COMMON}"
+        val BASE_ACTIVITY = "${BASE}.${CommonPackageDef.UI}.activity"
+        val BASE_FRAGMENT = "${CommonPackageDef.ACTION_FRAGMENT}.${CommonPackageDef.PackageLib.COMMON}"
+
+        // activity 相关
+        val ACTIVITY_PATTERN_LOCK = "${BASE_ACTIVITY}.PatternLockActivity"
+    }
+
     /**
      * Main 插件
      */
