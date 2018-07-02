@@ -59,7 +59,7 @@ class LoginActivity : BaseActivity() {
      */
     private fun setLoginStatus(loginStatus: Boolean) {
         val bundle = Bundle()
-        bundle.putBoolean(RemoteRouterDef.PluginUser.PARAMS_LOGIN_STATUS, loginStatus)
+        bundle.putBoolean(RemoteRouterDef.PluginUser.RESULT_LOGIN_STATUS, loginStatus)
         intent.putExtras(bundle)
         setResult(Activity.RESULT_OK, intent)
         finish()

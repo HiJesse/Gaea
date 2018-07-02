@@ -44,7 +44,9 @@ class MainFragment : BaseFragment() {
         showLoginStatus()
 
         btnLogin.setOnClickListener {
-            ActivityRouter.startActivity(this, RemoteRouterDef.PluginUser.ACTIVITY_LOGIN, RemoteRouterDef.PluginUser.CODE_LOGIN_STATUS)
+            ActivityRouter.startActivity(this,
+                    RemoteRouterDef.PluginUser.ACTIVITY_LOGIN,
+                    RemoteRouterDef.PluginUser.RESULT_CODE_LOGIN_STATUS)
         }
 
         btnUninstallScanner.setOnClickListener {
@@ -58,6 +60,14 @@ class MainFragment : BaseFragment() {
 
         btnLoadPatch.setOnClickListener {
             updateViewModel.checkUpdate(UpdateViewModel.Mode.PATCH)
+        }
+
+        btnPatternLock.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putBoolean(RemoteRouterDef.LibCommon.PARAMS_LOCK_CLOSEABLE, true)
+            ActivityRouter.startActivity(this,
+                    RemoteRouterDef.LibCommon.ACTIVITY_PATTERN_LOCK,
+                    bundle)
         }
     }
 
@@ -75,8 +85,8 @@ class MainFragment : BaseFragment() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == RemoteRouterDef.PluginUser.CODE_LOGIN_STATUS && resultCode == Activity.RESULT_OK) {
-            loginStatus = data?.extras?.getBoolean(RemoteRouterDef.PluginUser.PARAMS_LOGIN_STATUS)!!
+        if (requestCode == RemoteRouterDef.PluginUser.RESULT_CODE_LOGIN_STATUS && resultCode == Activity.RESULT_OK) {
+            loginStatus = data?.extras?.getBoolean(RemoteRouterDef.PluginUser.RESULT_LOGIN_STATUS)!!
             NLogger.d(mTag, "login status $loginStatus")
             showLoginStatus()
         }

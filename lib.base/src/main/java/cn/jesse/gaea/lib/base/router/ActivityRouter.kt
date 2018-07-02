@@ -22,6 +22,13 @@ object ActivityRouter {
     }
 
     /**
+     * activity 发起 带参数跳转
+     */
+    fun startActivity(activity: Activity, uri: String, bundle: Bundle?) {
+        startActivity(activity, uri, bundle, CODE_IGNORE, CODE_IGNORE)
+    }
+
+    /**
      * activity 带activity result跳转
      */
     fun startActivity(activity: Activity, uri: String, requestCode: Int) {
@@ -40,6 +47,13 @@ object ActivityRouter {
      */
     fun startActivity(fragment: Fragment, uri: String, requestCode: Int) {
         startActivity(fragment, uri, null, CODE_IGNORE, requestCode)
+    }
+
+    /**
+     * activity 发起 带参数跳转
+     */
+    fun startActivity(fragment: Fragment, uri: String, bundle: Bundle?) {
+        startActivity(fragment, uri, bundle, CODE_IGNORE, CODE_IGNORE)
     }
 
     /**

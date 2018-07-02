@@ -19,20 +19,6 @@ abstract class BaseActivity : AppCompatActivity() {
     private var backPressedEnable = true
     private var fullScreenEnable = false
 
-    /**
-     * 设置是否需要回退页面
-     */
-    open fun setBackPressedEnable(): Boolean {
-        return true
-    }
-
-    /**
-     * 设置是否需要页面全屏
-     */
-    open fun setFullScreenEnable(): Boolean {
-        return false
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         fullScreenEnable = setFullScreenEnable()
@@ -97,6 +83,20 @@ abstract class BaseActivity : AppCompatActivity() {
 
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+    }
+
+    /**
+     * 设置是否需要回退页面
+     */
+    open fun setBackPressedEnable(): Boolean {
+        return true
+    }
+
+    /**
+     * 设置是否需要页面全屏
+     */
+    open fun setFullScreenEnable(): Boolean {
+        return false
     }
 
     /**

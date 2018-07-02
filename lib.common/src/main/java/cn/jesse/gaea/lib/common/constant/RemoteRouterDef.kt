@@ -13,6 +13,7 @@ object RemoteRouterDef {
 
         // activity 相关
         val ACTIVITY_PATTERN_LOCK = "${BASE_ACTIVITY}.PatternLockActivity"
+        val PARAMS_LOCK_CLOSEABLE = "PARAMS_LOCK_CLOSEABLE"
     }
 
     /**
@@ -39,8 +40,8 @@ object RemoteRouterDef {
 
         // activity 相关
         val ACTIVITY_LOGIN = "${BASE_ACTIVITY}.LoginActivity"
-        val CODE_LOGIN_STATUS = 100
-        val PARAMS_LOGIN_STATUS = "PARAMS_LOGIN_STATUS"
+        val RESULT_CODE_LOGIN_STATUS = 100
+        val RESULT_LOGIN_STATUS = "PARAMS_LOGIN_STATUS"
 
         // fragment相关
         val FRAGMENT_USER_CENTER = "${BASE_FRAGMENT}.userCenter"
