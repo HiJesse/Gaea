@@ -34,6 +34,14 @@
         android:text="@string/main_fragment_login" />
 
     <Button
+        android:id="@+id/btnPatternLock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:text="@string/main_fragment_pattern_lock" />
+
+    <Button
         android:id="@+id/btnLoadPatch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

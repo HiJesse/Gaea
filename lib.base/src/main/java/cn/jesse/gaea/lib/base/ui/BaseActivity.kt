@@ -2,6 +2,8 @@ package cn.jesse.gaea.lib.base.ui
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.Window
+import android.view.WindowManager
 import cn.jesse.gaea.lib.base.util.CheckUtil
 import cn.jesse.gaea.lib.base.util.PermissionUtil
 import cn.jesse.nativelogger.NLogger
@@ -14,9 +16,14 @@ import cn.jesse.nativelogger.NLogger
 abstract class BaseActivity : AppCompatActivity() {
     protected var mTag = "BaseActivity"
     protected var permissionRequester: PermissionUtil.PermissionRequestObject? = null
+    private var backPressedEnable = true
+    private var fullScreenEnable = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        fullScreenEnable = setFullScreenEnable()
+        backPressedEnable = setBackPressedEnable()
+        setFullScreen()
         mTag = getLogTag()
         NLogger.d(mTag, "onCreate")
         setContentView(getContentLayout())
@@ -53,13 +60,43 @@ abstract class BaseActivity : AppCompatActivity() {
         NLogger.d(mTag, "onDestroy")
     }
 
+    override fun onBackPressed() {
+        if (!backPressedEnable) {
+            return
+        }
+        super.onBackPressed()
+    }
+
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         NLogger.d(mTag, "onRequestPermissionsResult $requestCode $permissions $grantResults")
         if (CheckUtil.isNull(permissionRequester)) {
             return
         }
 
-        permissionRequester!!.onRequestPermissionsResult(requestCode, permissions,grantResults)
+        permissionRequester!!.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
+    private fun setFullScreen() {
+        if (!fullScreenEnable) {
+            return
+        }
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+    }
+
+    /**
+     * 设置是否需要回退页面
+     */
+    open fun setBackPressedEnable(): Boolean {
+        return true
+    }
+
+    /**
+     * 设置是否需要页面全屏
+     */
+    open fun setFullScreenEnable(): Boolean {
+        return false
     }
 
     /**

@@ -7,10 +7,7 @@ import android.taobao.atlas.framework.Framework
 import android.taobao.atlas.runtime.ActivityTaskMgr
 import android.taobao.atlas.runtime.ClassNotFoundInterceptorCallback
 import android.text.TextUtils
-import cn.jesse.gaea.lib.base.util.CheckUtil
-import cn.jesse.gaea.lib.base.util.ContextUtil
-import cn.jesse.gaea.lib.base.util.FileDownloaderUtil
-import cn.jesse.gaea.lib.base.util.MD5Util
+import cn.jesse.gaea.lib.base.util.*
 import cn.jesse.gaea.lib.common.bean.RemoteBundleInfoBean
 import cn.jesse.gaea.lib.common.dataset.DataSetManager
 import cn.jesse.gaea.lib.network.transformer.IOMainThreadTransformer
@@ -68,7 +65,7 @@ object AtlasUpdateUtil {
     }
 
     /**
-     * 安装bundle
+     * 安装bundle, 安装成功后删除本地bundle文件
      *
      * @param bundleName 要安装的bundle名称
      * @param path bundle物理文件路径
@@ -82,6 +79,11 @@ object AtlasUpdateUtil {
             Toasty.normal(ContextUtil.getApplicationContext(), "插件安装失败 : ${e.message}").show()
             NLogger.e(TAG, "installBundle 插件安装失败, : ${e.message}")
         }
+
+        if (succeed) {
+            FileUtil.deleteFile(path)
+        }
+
         return succeed
     }
 

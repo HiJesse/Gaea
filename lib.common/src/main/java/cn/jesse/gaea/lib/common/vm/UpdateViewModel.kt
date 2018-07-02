@@ -8,6 +8,7 @@ import cn.jesse.gaea.lib.base.util.FileDownloaderUtil
 import cn.jesse.gaea.lib.base.vm.BaseViewModel
 import cn.jesse.gaea.lib.common.api.UpdateService
 import cn.jesse.gaea.lib.common.bean.CheckUpdateBean
+import cn.jesse.gaea.lib.common.constant.PluginDef
 import cn.jesse.gaea.lib.common.dataset.DataSetManager
 import cn.jesse.gaea.lib.common.util.AtlasUpdateUtil
 import cn.jesse.gaea.lib.common.util.WorkspaceUtil
@@ -23,7 +24,7 @@ import es.dmoral.toasty.Toasty
  * @author Jesse
  */
 class UpdateViewModel : BaseViewModel() {
-    private val TAG = "UpdateViewModel"
+    private val TAG = "${PluginDef.TAG}.UpdateViewModel"
     val updateResult: MutableLiveData<DataStatusResult<CheckUpdateBean>> = MutableLiveData()
 
     /**

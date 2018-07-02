@@ -20,6 +20,23 @@ class AppDataSet {
     private val TAG = "AppDataSet"
     private val appSP = SPUtil.appSP
 
+
+    // 手势解锁MD5
+    var patternLock: String? = null
+        get() {
+            if (CheckUtil.isNull(field)) {
+                field = appSP.getStringFlag(SPDef.App.KEY_PATTERN_LOCK, "")
+            }
+            return field
+        }
+        set(value) {
+            if (field == value) {
+                return
+            }
+            field = value
+            appSP.setFlag(SPDef.App.KEY_PATTERN_LOCK, field)
+        }
+
     // 宿主版本
     var hostVersion: Int = 0
         get() {
