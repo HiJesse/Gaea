@@ -36,6 +36,14 @@ class PatternLockActivity : BaseActivity() {
                 }
     }
 
+    override fun setBackPressedEnable(): Boolean {
+        return false
+    }
+
+    override fun setFullScreenEnable(): Boolean {
+        return true
+    }
+
     /**
      * 处理手势结果监听
      */

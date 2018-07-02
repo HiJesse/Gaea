@@ -22,6 +22,10 @@ class SplashActivity : BaseActivity() {
         return R.layout.host_activity_splash
     }
 
+    override fun setFullScreenEnable(): Boolean {
+        return true
+    }
+
     override fun onActivityCreated() {
         val updateViewModel = ViewModelProviders.of(this).get(UpdateViewModel::class.java)
         updateViewModel.checkUpdate(UpdateViewModel.Mode.BUNDLE)
