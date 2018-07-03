@@ -4,25 +4,21 @@
     android:orientation="vertical">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/text_small"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:gravity="center"
         android:text="@string/user_activity_login_welcome" />
 
     <Button
         android:id="@+id/btnLoginSucceed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/button_normal"
         android:layout_gravity="center_horizontal"
         android:layout_margin="10dp"
         android:text="@string/user_activity_login_succeed" />
 
     <Button
         android:id="@+id/btnLoginFailed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/button_normal"
         android:layout_gravity="center_horizontal"
         android:layout_margin="10dp"
         android:text="@string/user_activity_login_failed" />

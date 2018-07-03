@@ -3,6 +3,7 @@ package cn.jesse.gaea.lib.base.ui
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.view.View
 import cn.jesse.nativelogger.NLogger
 
@@ -63,6 +64,13 @@ abstract class BaseFragment : Fragment() {
     override fun onDetach() {
         super.onDetach()
         NLogger.d(mTag, "onDetach")
+    }
+
+    /**
+     * 根据R.color.id 获取颜色
+     */
+    open fun getResColor(id: Int): Int {
+        return ContextCompat.getColor(activity!!.baseContext, id)
     }
 
     /**

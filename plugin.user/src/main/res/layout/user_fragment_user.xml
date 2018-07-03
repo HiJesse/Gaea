@@ -4,26 +4,21 @@
     android:orientation="vertical">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/text_small"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:gravity="center"
         android:text="@string/user_fragment_welcome" />
 
     <TextView
         android:id="@+id/tvVersion"
+        style="@style/text_normal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:text="@string/user_fragment_welcome" />
+        android:layout_marginTop="10dp" />
 
     <Button
         android:id="@+id/btnLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/button_normal"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
         android:text="登录" />

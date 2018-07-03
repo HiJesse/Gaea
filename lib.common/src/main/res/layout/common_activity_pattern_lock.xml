@@ -23,10 +23,10 @@
 
         <TextView
             android:id="@+id/tvHint"
+            style="@style/text_normal"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center" />
+            android:layout_weight="1" />
 
         <com.andrognito.patternlockview.PatternLockView
             android:id="@+id/plvLock"
@@ -35,15 +35,15 @@
             android:padding="10dp"
             app:aspectRatio="square"
             app:aspectRatioEnabled="true"
-            app:correctStateColor="@color/colorPrimary"
+            app:correctStateColor="@color/blue_dark"
             app:dotAnimationDuration="200"
             app:dotCount="3"
             app:dotNormalSize="12dp"
             app:dotSelectedSize="24dp"
-            app:normalStateColor="@color/gray_press_dark"
+            app:normalStateColor="@color/gray_dark"
             app:pathEndAnimationDuration="100"
             app:pathWidth="4dp"
-            app:wrongStateColor="@color/pomegranate" />
+            app:wrongStateColor="@color/red_light" />
 
     </LinearLayout>
 

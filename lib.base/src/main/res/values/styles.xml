@@ -13,4 +13,33 @@
         <item name="android:activityCloseExitAnimation">@anim/host_activity_out</item>
     </style>
 
+    <style name="text_base">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:minLines">1</item>
+        <item name="android:scrollHorizontally">true</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="text_normal" parent="text_base">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/common_text</item>
+    </style>
+
+    <style name="text_large" parent="text_base">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/common_text</item>
+    </style>
+
+    <style name="text_small" parent="text_base">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/common_text</item>
+    </style>
+
+    <style name="button_normal" parent="text_normal">
+        <item name="android:background">@color/gray_light</item>
+    </style>
+
 </resources>

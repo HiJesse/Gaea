@@ -3,7 +3,6 @@ package cn.jesse.gaea.plugin.main.ui.fragment
 import android.app.Activity
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -77,10 +76,10 @@ class MainFragment : BaseFragment() {
     private fun showLoginStatus() {
         if (loginStatus) {
             tvLoginStatus.text = "(已登录)"
-            tvLoginStatus.setTextColor(Color.GREEN)
+            tvLoginStatus.setTextColor(getResColor(R.color.common_text))
         } else {
             tvLoginStatus.text = "(未登录)"
-            tvLoginStatus.setTextColor(Color.RED)
+            tvLoginStatus.setTextColor(getResColor(R.color.common_text_error))
         }
     }
 
