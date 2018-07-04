@@ -8,8 +8,7 @@
 
     <TextView
         android:id="@+id/tvSplash"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/text_large"
         android:text="@string/host_welcome"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

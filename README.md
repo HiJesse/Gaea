@@ -33,15 +33,6 @@ Gaea是一个基于Atlas实现Android项目组件化和插件化的脚手架. �
 
 执行`./gradlew clean assembleDebug publish`. 根据项目规约会将组件`app`和`lib.*`直接打进apk, 组件`plugin.*`编译成so文件打进apk的lib目录下. 最终生成debug apk包, 并将ap基准包以app版本号为单位部署到localmaven中, 方便生成TPatch.
 
-### 远程插件构建和加载
-
-1. 确保根目录`config.gradle`文件中`computeRemoteBundles()`方法配置插件为远程插件.
-2. 执行`./gradlew clean assembleDebug`. 远程bundle的编译产物输出在`build/output/remote-bundles`中.
-3. 将SO插件部署在后端或者放在静态云上.
-4. 请求`/gaea/update/checkUpdate`接口获取插件信息.
-5. 通过Common组件的`AtlasUpdateUtil.classNotFoundInterceptorCallback`下载校验和安装插件.
-6. `AtlasUpdateUtil.uninstallBundle` 卸载远程插件.
-
 ### TPatch构建和加载
 
 TPatch是用来修改或升级宿主和非远程插件的方式. 操作流程以App 1.0.0版本为例.
@@ -53,3 +44,21 @@ TPatch是用来修改或升级宿主和非远程插件的方式. 操作流程以
 5. 请求`/gaea/update/checkUpdate`接口获取TPatch信息.
 6. 下载TPatch文件, 并通过Common组件的`AtlasUpdateUtil.loadTPatch`方法校验和安装patch.
 7. 安装成功后重启App进程使patch生效.
+
+### 远程插件相关
+
+构建, 加载和卸载
+
+1. 确保根目录`config.gradle`文件中`computeRemoteBundles()`方法配置插件为远程插件.
+2. 执行`./gradlew clean assembleDebug`. 远程bundle的编译产物输出在`build/output/remote-bundles`中.
+3. 将SO插件部署在后端或者放在静态云上.
+4. 请求`/gaea/update/checkUpdate`接口获取插件信息.
+5. 通过Common组件的`AtlasUpdateUtil.classNotFoundInterceptorCallback`下载校验和安装插件.
+6. `AtlasUpdateUtil.uninstallBundle` 卸载远程插件.
+
+迭代
+
+由于插件在编译时会将当前插件的manifest文件合并到宿主的manifest中, 并且在APP运行期间需要用到例如四大组件权限声明之类的也是通过宿主的manifest获取. 所以远程插件的迭代根据是否修改了manifest文件分为两种不同的流程.
+
+* 未修改manifest文件, 走远程插件构建, 加载和卸载的流程. 根据远程插件的版本号, 下载新版本插件 -> 卸载老版本插件 -> 安装新版本插件.
+* 修改了manifest文件, 走TPatch构建和加载流程. 如果APP已经安装过远程插件TPatch加载之后会合并修改. 如果没安装则下载最新的远程插件.

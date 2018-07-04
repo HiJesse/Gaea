@@ -11,48 +11,40 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
+            style="@style/text_small"
             android:text="@string/main_fragment_welcome" />
 
         <TextView
             android:id="@+id/tvLoginStatus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center" />
+            style="@style/text_small" />
 
     </LinearLayout>
 
 
     <Button
         android:id="@+id/btnLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/button_normal"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
         android:text="@string/main_fragment_login" />
 
     <Button
         android:id="@+id/btnPatternLock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/button_normal"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
         android:text="@string/main_fragment_pattern_lock" />
 
     <Button
         android:id="@+id/btnLoadPatch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/button_normal"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
         android:text="@string/main_fragment_load_patch" />
 
     <Button
         android:id="@+id/btnUninstallScanner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/button_normal"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
         android:text="@string/main_fragment_uninstall_scanner" />

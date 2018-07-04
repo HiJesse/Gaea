@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.graphics.Color
 import android.opengl.Visibility
+import android.support.v4.content.ContextCompat
 import android.view.View
 import cn.jesse.gaea.lib.base.ui.BaseActivity
 import cn.jesse.gaea.lib.base.util.CheckUtil
@@ -113,9 +114,9 @@ class PatternLockActivity : BaseActivity() {
         tvHint.text = hint
 
         if (isError) {
-            tvHint.setTextColor(Color.RED)
+            tvHint.setTextColor(getResColor(R.color.common_text_error))
         } else {
-            tvHint.setTextColor(Color.BLUE)
+            tvHint.setTextColor(getResColor(R.color.common_text))
         }
     }
 }
