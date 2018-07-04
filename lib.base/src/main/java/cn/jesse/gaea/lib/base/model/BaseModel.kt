@@ -5,5 +5,4 @@ package cn.jesse.gaea.lib.base.model
  *
  * @author Jesse
  */
-interface BaseModel {
-}
+interface BaseModel

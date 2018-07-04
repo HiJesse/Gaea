@@ -21,6 +21,6 @@ class ExampleInstrumentedTest {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
 
-        assertEquals("cn.jesse.gaea.plugin.main.test", appContext.getPackageName())
+        assertEquals("cn.jesse.gaea.plugin.main.test", appContext.packageName)
     }
 }
