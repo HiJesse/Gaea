@@ -10,8 +10,10 @@ import android.view.ViewGroup
 import cn.jesse.gaea.lib.base.router.ActivityRouter
 import cn.jesse.gaea.lib.base.ui.BaseFragment
 import cn.jesse.gaea.lib.base.util.AppUtil
+import cn.jesse.gaea.lib.base.util.AtlasRemoteUtil
 import cn.jesse.gaea.lib.base.util.ContextUtil
 import cn.jesse.gaea.lib.common.constant.RemoteRouterDef
+import cn.jesse.gaea.lib.common.transactor.user.IToast
 import cn.jesse.gaea.lib.common.util.AtlasUpdateUtil
 import cn.jesse.gaea.lib.common.vm.UpdateViewModel
 import cn.jesse.gaea.plugin.main.R
@@ -67,6 +69,12 @@ class MainFragment : BaseFragment() {
             ActivityRouter.startActivity(this,
                     RemoteRouterDef.LibCommon.ACTIVITY_PATTERN_LOCK,
                     bundle)
+        }
+
+        btnInvokeUser.setOnClickListener {
+            AtlasRemoteUtil.fetchRemoteTransactor(activity!!, "", IToast::class.java, {iToast ->
+                iToast.toast("从Main调起User的Toast")
+            })
         }
     }
 
