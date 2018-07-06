@@ -3,7 +3,7 @@ Gaea
 
 Gaea是一个基于Atlas实现Android项目组件化和插件化的脚手架. 可以根据此脚手架快速开发一款具有插件化特性的App, 也可以提供参考和帮助现有项目实现插件化.
 
-### 项目模块结构
+### 项目模块
 
 * 模块命名规约
 
@@ -27,7 +27,16 @@ Gaea是一个基于Atlas实现Android项目组件化和插件化的脚手架. �
 	| plugin.main | main插件, 提供App主页等. |
 	| plugin.user | user插件, 提供用户中心登录等. |
 	| remote.scanner | scanner远程插件, 动态提供图形扫描功能. |
-	
+
+### 插件间交互
+
+插件间交互主要涉及两个组件. 由于common组件是跟业务相关的基础中间件, 所有组件都可见. 所以插件间交互需要用到的常量都下沉到common组件中. base组件则提供交互相关的工具.
+
+|相关类|所属组件|职责|
+|:--:|:--:|:--:|
+|[RemoteRouterDef](https://github.com/HiJesse/Gaea/blob/master/lib.common/src/main/java/cn/jesse/gaea/lib/common/constant/RemoteRouterDef.kt) |common组件|各大插件之前交互需要用到的常量汇总|
+|[ActivityRouter](https://github.com/HiJesse/Gaea/blob/master/lib.base/src/main/java/cn/jesse/gaea/lib/base/router/ActivityRouter.kt) |base组件|工具, 负责插件间页面跳转activity路由|
+| [AtlasRemoteUtil](https://github.com/HiJesse/Gaea/blob/master/lib.base/src/main/java/cn/jesse/gaea/lib/base/util/AtlasRemoteUtil.kt) |base组件|工具, 负责插件间获取fragment, view和方法调用|
 	
 ### APK构建
 
