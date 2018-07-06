@@ -45,6 +45,9 @@ object RemoteRouterDef {
 
         // fragment相关
         val FRAGMENT_USER_CENTER = "${BASE_FRAGMENT}.userCenter"
+
+        // transactor
+        val TRANSACTOR_USER = "${CommonPackageDef.ACTION_TRANSACTOR}.${CommonPackageDef.PackagePlugin.USER}"
     }
 
     /**
@@ -83,7 +86,11 @@ object RemoteRouterDef {
         // remote plugin 路径
         val REMOTE = "remote"
 
+        // remote fragment 前缀
         val ACTION_FRAGMENT = "atlas.fragment.intent.action"
+
+        // remote transactor 前缀
+        val ACTION_TRANSACTOR = "atlas.transaction.intent.action"
 
         // 中间件, 或插件lib的包路径
         object PackageLib {

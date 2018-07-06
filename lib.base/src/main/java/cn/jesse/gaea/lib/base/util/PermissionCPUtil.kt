@@ -57,9 +57,7 @@ object PermissionCPUtil {
             NLogger.e(TAG, "checkContactPermission $e.message")
             return false
         } finally {
-            if (phoneCursor != null) {
-                phoneCursor!!.close()
-            }
+            IOUtil.close(phoneCursor)
         }
         return true
     }

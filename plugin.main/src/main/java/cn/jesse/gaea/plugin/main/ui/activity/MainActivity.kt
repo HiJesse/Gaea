@@ -12,8 +12,8 @@ import cn.jesse.gaea.lib.base.util.CheckUtil
 import cn.jesse.gaea.lib.base.util.DoubleExitUtil
 import cn.jesse.gaea.lib.common.constant.RemoteRouterDef
 import cn.jesse.gaea.plugin.main.R
-import cn.jesse.gaea.plugin.main.ui.adapter.ViewPagerAdapter
 import cn.jesse.gaea.plugin.main.constant.PluginDef
+import cn.jesse.gaea.plugin.main.ui.adapter.ViewPagerAdapter
 import cn.jesse.nativelogger.NLogger
 import kotlinx.android.synthetic.main.main_activity_main.*
 
@@ -91,7 +91,7 @@ class MainActivity : BaseActivity(), RemoteFactory.OnRemoteStateListener<RemoteF
         })
 
         vpContent.adapter = adapter
-        AtlasRemoteUtil.fetchRemote(this, RemoteRouterDef.PluginUser.FRAGMENT_USER_CENTER, RemoteFragment::class.java, this)
+        AtlasRemoteUtil.fetchRemoteFragment(this, RemoteRouterDef.PluginUser.FRAGMENT_USER_CENTER, this)
     }
 
     override fun onFailed(errorInfo: String?) {

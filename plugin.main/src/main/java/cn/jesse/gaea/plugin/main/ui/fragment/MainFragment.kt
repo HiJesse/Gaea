@@ -10,8 +10,10 @@ import android.view.ViewGroup
 import cn.jesse.gaea.lib.base.router.ActivityRouter
 import cn.jesse.gaea.lib.base.ui.BaseFragment
 import cn.jesse.gaea.lib.base.util.AppUtil
+import cn.jesse.gaea.lib.base.util.AtlasRemoteUtil
 import cn.jesse.gaea.lib.base.util.ContextUtil
 import cn.jesse.gaea.lib.common.constant.RemoteRouterDef
+import cn.jesse.gaea.lib.common.transactor.user.IBundleInvoke
 import cn.jesse.gaea.lib.common.util.AtlasUpdateUtil
 import cn.jesse.gaea.lib.common.vm.UpdateViewModel
 import cn.jesse.gaea.plugin.main.R
@@ -42,12 +44,30 @@ class MainFragment : BaseFragment() {
 
         showLoginStatus()
 
+        // 拦截登录
         btnLogin.setOnClickListener {
             ActivityRouter.startActivity(this,
                     RemoteRouterDef.PluginUser.ACTIVITY_LOGIN,
                     RemoteRouterDef.PluginUser.RESULT_CODE_LOGIN_STATUS)
         }
 
+        // 拦截手势
+        btnPatternLock.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putBoolean(RemoteRouterDef.LibCommon.PARAMS_LOCK_CLOSEABLE, true)
+            ActivityRouter.startActivity(this,
+                    RemoteRouterDef.LibCommon.ACTIVITY_PATTERN_LOCK,
+                    bundle)
+        }
+
+        // 跨模块调用
+        btnInvokeUser.setOnClickListener {
+            AtlasRemoteUtil.fetchRemoteTransactor(activity!!, RemoteRouterDef.PluginUser.TRANSACTOR_USER, IBundleInvoke::class.java, { invoke ->
+                invoke.toast(activity!!, "从Main调起User的Toast")
+            })
+        }
+
+        // 卸载扫描模块
         btnUninstallScanner.setOnClickListener {
             AtlasUpdateUtil.uninstallBundle(RemoteRouterDef.PluginScanner.BASE)
         }
@@ -57,16 +77,9 @@ class MainFragment : BaseFragment() {
             return
         }
 
+        // T Patch 加载成功后隐藏掉
         btnLoadPatch.setOnClickListener {
             updateViewModel.checkUpdate(UpdateViewModel.Mode.PATCH)
-        }
-
-        btnPatternLock.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putBoolean(RemoteRouterDef.LibCommon.PARAMS_LOCK_CLOSEABLE, true)
-            ActivityRouter.startActivity(this,
-                    RemoteRouterDef.LibCommon.ACTIVITY_PATTERN_LOCK,
-                    bundle)
         }
     }
 
