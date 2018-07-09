@@ -36,11 +36,11 @@
         android:text="@string/main_fragment_pattern_lock" />
 
     <Button
-        android:id="@+id/btnInvokeUser"
+        android:id="@+id/btnInvokeScanner"
         style="@style/button_normal"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:text="@string/main_fragment_invoke_user" />
+        android:text="@string/main_fragment_invoke_scanner" />
 
     <Button
         android:id="@+id/btnLoadPatch"

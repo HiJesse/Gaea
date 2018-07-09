@@ -19,6 +19,7 @@ import cn.jesse.gaea.lib.common.vm.UpdateViewModel
 import cn.jesse.gaea.plugin.main.R
 import cn.jesse.gaea.plugin.main.constant.PluginDef
 import cn.jesse.nativelogger.NLogger
+import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.main_fragment_main.*
 
 /**
@@ -61,9 +62,13 @@ class MainFragment : BaseFragment() {
         }
 
         // 跨模块调用
-        btnInvokeUser.setOnClickListener {
-            AtlasRemoteUtil.fetchRemoteTransactor(activity!!, RemoteRouterDef.PluginUser.TRANSACTOR_USER, IBundleInvoke::class.java, { invoke ->
-                invoke.toast(activity!!, "从Main调起User的Toast")
+        btnInvokeScanner.setOnClickListener {
+            if (!AtlasUpdateUtil.isBundleInstalled(RemoteRouterDef.PluginScanner.BASE)) {
+                Toasty.normal(ContextUtil.getApplicationContext(), "请先安装插件").show()
+                return@setOnClickListener
+            }
+            AtlasRemoteUtil.fetchRemoteTransactor(activity!!, RemoteRouterDef.PluginScanner.TRANSACTOR_SCANNER, IBundleInvoke::class.java, { invoke ->
+                invoke.toast(activity!!, "从Main调起Scanner的Toast")
             })
         }
 

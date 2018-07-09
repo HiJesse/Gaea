@@ -64,6 +64,9 @@ object RemoteRouterDef {
 
         // fragment相关
         val FRAGMENT_SCAN = "${BASE_FRAGMENT}.scanner"
+
+        // transactor
+        val TRANSACTOR_SCANNER = "${CommonPackageDef.ACTION_TRANSACTOR}.${CommonPackageDef.PackagePlugin.SCANNER}"
     }
 
     /**

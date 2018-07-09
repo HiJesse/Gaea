@@ -3,6 +3,7 @@ package cn.jesse.gaea.lib.common.util
 import android.app.Activity
 import android.taobao.atlas.bundleInfo.AtlasBundleInfoManager
 import android.taobao.atlas.framework.Atlas
+import android.taobao.atlas.framework.BundleInstallerFetcher
 import android.taobao.atlas.framework.Framework
 import android.taobao.atlas.runtime.ActivityTaskMgr
 import android.taobao.atlas.runtime.ClassNotFoundInterceptorCallback
@@ -65,6 +66,15 @@ object AtlasUpdateUtil {
     }
 
     /**
+     * 校验bundle是否安装
+     *
+     * @param bundleName bundle名称
+     */
+    fun isBundleInstalled(bundleName: String): Boolean {
+        return CheckUtil.isNotNull(BundleInstallerFetcher.obtainInstaller().getInstalledBundle(bundleName))
+    }
+
+    /**
      * 安装bundle, 安装成功后删除本地bundle文件
      *
      * @param bundleName 要安装的bundle名称
@@ -85,6 +95,15 @@ object AtlasUpdateUtil {
         }
 
         return succeed
+    }
+
+    /**
+     * 安装内部bundle
+     *
+     * @param bundleName 需要安装的内部bundle名称
+     */
+    fun installInternalBundle(bundleName: String) {
+        BundleInstallerFetcher.obtainInstaller().installSync(arrayOf(bundleName))
     }
 
     /**

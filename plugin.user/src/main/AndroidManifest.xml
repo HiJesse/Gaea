@@ -1,20 +1,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cn.jesse.gaea.plugin.user" >
+    package="cn.jesse.gaea.plugin.user">
 
     <application
         android:allowBackup="true"
         android:supportsRtl="true">
 
-        <activity
-            android:name=".ui.activity.LoginActivity"/>
+        <!-- activity -->
+        <activity android:name=".ui.activity.LoginActivity" />
 
+        <!-- fragment -->
         <meta-data
             android:name="atlas.fragment.intent.action.user.userCenter"
             android:value="cn.jesse.gaea.plugin.user.ui.fragment.UserFragment" />
 
+        <!-- transactor -->
         <meta-data
             android:name="atlas.transaction.intent.action.user"
-            android:value="cn.jesse.gaea.plugin.user.transactor.UserTransactor"/>
+            android:value="cn.jesse.gaea.plugin.user.transactor.UserTransactor" />
     </application>
 
 </manifest>
