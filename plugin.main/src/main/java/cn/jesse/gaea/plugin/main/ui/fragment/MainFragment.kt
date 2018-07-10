@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import cn.jesse.gaea.lib.accessibility.service.MYAccessibilityService
+import cn.jesse.gaea.lib.accessibility.util.AccessibilityUtil
 import cn.jesse.gaea.lib.base.router.ActivityRouter
 import cn.jesse.gaea.lib.base.ui.BaseFragment
 import cn.jesse.gaea.lib.base.util.AppUtil
@@ -70,6 +72,16 @@ class MainFragment : BaseFragment() {
             AtlasRemoteUtil.fetchRemoteTransactor(activity!!, RemoteRouterDef.PluginScanner.TRANSACTOR_SCANNER, IBundleInvoke::class.java, { invoke ->
                 invoke.toast(activity!!, "从Main调起Scanner的Toast")
             })
+        }
+
+        // 检测辅助权限
+        btnInitAccessibility.setOnClickListener {
+            if (AccessibilityUtil.checkAccessibilityEnabled(MYAccessibilityService::class.java.canonicalName)) {
+                Toasty.normal(activity!!, "辅助已经启动").show()
+                return@setOnClickListener
+            }
+
+            AccessibilityUtil.gotoAccessPage(activity!!)
         }
 
         // 卸载扫描模块

@@ -1,4 +1,4 @@
-package cn.jesse.gaea.remote.accessibility
+package cn.jesse.gaea.lib.accessibility
 
 import org.junit.Test
 

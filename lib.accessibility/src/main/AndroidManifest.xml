@@ -1,0 +1,22 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="cn.jesse.gaea.lib.accessibility">
+
+    <application
+        android:allowBackup="true"
+        android:supportsRtl="true">
+
+        <service
+            android:name=".service.MYAccessibilityService"
+            android:label="@string/accessibility_service_my"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility_common" />
+        </service>
+
+    </application>
+</manifest>

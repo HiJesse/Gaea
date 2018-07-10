@@ -8,6 +8,7 @@
     <string name="main_fragment_login">拦截登录(打开User模块登录页)</string>
     <string name="main_fragment_pattern_lock">拦截手势密码</string>
     <string name="main_fragment_invoke_scanner">调起Scanner远程模块方法</string>
+    <string name="main_fragment_init_accessibility">检测辅助权限</string>
     <string name="main_fragment_load_patch">加载TPatch(重启后生效)</string>
     <string name="main_fragment_uninstall_scanner">卸载Scanner模块</string>
 

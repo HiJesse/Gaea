@@ -27,15 +27,6 @@ android {
 
 }
 
-atlas {
-
-    bundleConfig{
-        // 声明bundle
-        awbBundle true
-    }
-
-}
-
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     providedCompile project(':lib.base')

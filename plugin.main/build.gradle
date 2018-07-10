@@ -41,4 +41,5 @@ dependencies {
     providedCompile project(':lib.base')
     providedCompile project(':lib.common')
     providedCompile project(':lib.network')
+    providedCompile project(':lib.accessibility')
 }

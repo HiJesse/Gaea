@@ -1,4 +1,4 @@
-package cn.jesse.gaea.remote.accessibility
+package cn.jesse.gaea.lib.accessibility
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4

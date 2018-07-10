@@ -60,14 +60,9 @@ def computeRemoteBundles() {
     String remoteBundles = ""
 
     final boolean isScannerRemote = true
-    final boolean isAccessibilityRemote = false
 
     if (isScannerRemote) {
         remoteBundles = addSplit(remoteBundles, 'remote.scanner')
-    }
-
-    if (isAccessibilityRemote) {
-        remoteBundles = addSplit(remoteBundles, 'remote.accessibility')
     }
 
     print("computeRemoteBundles: ${remoteBundles} \n")

@@ -43,6 +43,13 @@
         android:text="@string/main_fragment_invoke_scanner" />
 
     <Button
+        android:id="@+id/btnInitAccessibility"
+        style="@style/button_normal"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:text="@string/main_fragment_init_accessibility" />
+
+    <Button
         android:id="@+id/btnLoadPatch"
         style="@style/button_normal"
         android:layout_gravity="center_horizontal"

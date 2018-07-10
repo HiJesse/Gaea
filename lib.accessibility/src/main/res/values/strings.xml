@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">lib.accessibility</string>
+
+    <string name="accessibility_service_my">MY辅助</string>
+</resources>

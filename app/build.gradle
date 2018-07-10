@@ -74,8 +74,8 @@ dependencies {
     compile project(':lib.base')
     compile project(':lib.common')
     compile project(':lib.network')
+    compile project(':lib.accessibility')
     bundleCompile project(':plugin.main')
     bundleCompile project(':plugin.user')
-    bundleCompile project(':remote.scanner')
     bundleCompile project(':remote.scanner')
 }
