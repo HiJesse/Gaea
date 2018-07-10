@@ -77,4 +77,5 @@ dependencies {
     bundleCompile project(':plugin.main')
     bundleCompile project(':plugin.user')
     bundleCompile project(':remote.scanner')
+    bundleCompile project(':remote.scanner')
 }

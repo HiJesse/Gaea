@@ -7,4 +7,5 @@ include ':app',
         ':plugin.main',
         ':plugin.user',
         // 远程插件
-        ':remote.scanner'
+        ':remote.scanner',
+        ':remote.accessibility'
