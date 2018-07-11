@@ -4,7 +4,7 @@ import android.view.accessibility.AccessibilityEvent
 
 
 
-class MYAccessibilityService : BaseAccessibilityService() {
+class ThumbUpQQService : BaseAccessibilityService() {
 
     override fun onAccessibilityEvent(event: AccessibilityEvent) {
         super.onAccessibilityEvent(event)

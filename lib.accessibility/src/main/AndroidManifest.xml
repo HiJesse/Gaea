@@ -6,8 +6,8 @@
         android:supportsRtl="true">
 
         <service
-            android:name=".service.MYAccessibilityService"
-            android:label="@string/accessibility_service_my"
+            android:name=".service.ThumbUpQQService"
+            android:label="@string/accessibility_service_name"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService" />

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">lib.accessibility</string>
+    <string name="accessibility_name">lib.accessibility</string>
 
-    <string name="accessibility_service_my">MY辅助</string>
+    <string name="accessibility_service_name">Gaea辅助</string>
 </resources>

@@ -1,12 +1,12 @@
 package cn.jesse.gaea.lib.accessibility.util
 
-import android.accessibilityservice.AccessibilityServiceInfo
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.provider.Settings
-import android.view.accessibility.AccessibilityManager
+import android.text.TextUtils
+import cn.jesse.gaea.lib.base.util.CheckUtil
 import cn.jesse.gaea.lib.base.util.ContextUtil
+import cn.jesse.nativelogger.NLogger
 
 /**
  * accessibility 工具
@@ -32,15 +32,37 @@ object AccessibilityUtil {
      * @return 是否启用
      */
     fun checkAccessibilityEnabled(serviceName: String): Boolean {
-        val mAccessibilityManager: AccessibilityManager= ContextUtil.getApplicationContext()
-                .getSystemService(Context.ACCESSIBILITY_SERVICE) as AccessibilityManager
+        val context = ContextUtil.getApplicationContext()
+        val serviceStr = "${context.packageName}/$serviceName"
 
-        val accessibilityServices = mAccessibilityManager.getEnabledAccessibilityServiceList(AccessibilityServiceInfo.FEEDBACK_GENERIC)
-        for (info in accessibilityServices) {
-            if (info.id == serviceName) {
+        var accessibilityEnabled = 0
+        try {
+            accessibilityEnabled = Settings.Secure.getInt(context.contentResolver, Settings.Secure.ACCESSIBILITY_ENABLED)
+        } catch (e: Settings.SettingNotFoundException) {
+            NLogger.e(TAG, "checkAccessibilityEnabled ${e.message}")
+        }
+
+        if (accessibilityEnabled == 0) {
+            return false
+        }
+
+        val settingValue = Settings.Secure.getString(context.contentResolver, Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES)
+
+        if (CheckUtil.isNull(settingValue)) {
+            return false
+        }
+
+        val mStringColonSplitter = TextUtils.SimpleStringSplitter(':')
+
+        mStringColonSplitter.setString(settingValue)
+        while (mStringColonSplitter.hasNext()) {
+            val accessibilityService = mStringColonSplitter.next()
+
+            if (accessibilityService.equals(serviceStr, true)) {
                 return true
             }
         }
+
         return false
     }
 }

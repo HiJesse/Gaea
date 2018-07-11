@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import cn.jesse.gaea.lib.accessibility.service.MYAccessibilityService
+import cn.jesse.gaea.lib.accessibility.service.ThumbUpQQService
 import cn.jesse.gaea.lib.accessibility.util.AccessibilityUtil
 import cn.jesse.gaea.lib.base.router.ActivityRouter
 import cn.jesse.gaea.lib.base.ui.BaseFragment
@@ -76,7 +76,7 @@ class MainFragment : BaseFragment() {
 
         // 检测辅助权限
         btnInitAccessibility.setOnClickListener {
-            if (AccessibilityUtil.checkAccessibilityEnabled(MYAccessibilityService::class.java.canonicalName)) {
+            if (AccessibilityUtil.checkAccessibilityEnabled(ThumbUpQQService::class.java.canonicalName)) {
                 Toasty.normal(activity!!, "辅助已经启动").show()
                 return@setOnClickListener
             }
