@@ -43,7 +43,7 @@ open class BaseAccessibilityService : AccessibilityService() {
      *
      * @param action action
      */
-    private fun sendMessage(action: Int) {
+    protected fun sendMessage(action: Int) {
         performGlobalHandler.sendEmptyMessageDelayed(action, DELAY_MESSAGE)
     }
 
