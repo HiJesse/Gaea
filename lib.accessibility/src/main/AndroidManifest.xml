@@ -15,7 +15,7 @@
 
             <meta-data
                 android:name="android.accessibilityservice"
-                android:resource="@xml/accessibility_common" />
+                android:resource="@xml/accessibility_thumb_qq" />
         </service>
 
     </application>

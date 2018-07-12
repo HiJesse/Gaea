@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
+import cn.jesse.gaea.lib.base.util.CheckUtil
 import cn.jesse.nativelogger.NLogger
 
 /**
@@ -20,6 +21,11 @@ import cn.jesse.nativelogger.NLogger
 open class BaseAccessibilityService : AccessibilityService() {
     private val TAG = "BaseAccessibilityService"
     private val DELAY_MESSAGE = 500L
+    protected var eventType: Int = 0
+    protected var eventClassName: String = ""
+    protected var eventPackageName: String = ""
+    protected lateinit var event: AccessibilityEvent
+
 
     private val performGlobalHandler = Handler { msg ->
         performGlobalAction(msg.what)
@@ -39,6 +45,40 @@ open class BaseAccessibilityService : AccessibilityService() {
      */
     private fun sendMessage(action: Int) {
         performGlobalHandler.sendEmptyMessageDelayed(action, DELAY_MESSAGE)
+    }
+
+    /**
+     * 同步等待 delay时长
+     */
+    protected fun syncWait(delay: Long) {
+        try {
+            Thread.sleep(delay)
+        } catch (e: Exception) {
+            NLogger.e(TAG, "syncWait ${e.message}")
+        }
+    }
+
+    /**
+     * 判断text是否能匹配到AccessibilityNodeInfo
+     */
+    private fun stringEquals(nodeInfo: AccessibilityNodeInfo, text: String): Boolean {
+        if (CheckUtil.isNotNull(nodeInfo.text)) {
+            return text.equals(nodeInfo.text.toString(), true)
+        }
+
+        if (CheckUtil.isNotNull(nodeInfo.contentDescription)) {
+            return text.equals(nodeInfo.contentDescription.toString(), true)
+        }
+
+        if (CheckUtil.isNotNull(nodeInfo.contentDescription)) {
+            return text.equals(nodeInfo.contentDescription.toString(), true)
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && CheckUtil.isNotNull(nodeInfo.hintText)) {
+            return text.equals(nodeInfo.hintText.toString(), true)
+        }
+
+        return false
     }
 
 
@@ -69,11 +109,9 @@ open class BaseAccessibilityService : AccessibilityService() {
     fun findViewByText(text: String, clickable: Boolean = false): AccessibilityNodeInfo? {
         val accessibilityNodeInfo = rootInActiveWindow ?: return null
         val nodeInfoList = accessibilityNodeInfo.findAccessibilityNodeInfosByText(text)
-        if (nodeInfoList != null && !nodeInfoList.isEmpty()) {
-            for (nodeInfo in nodeInfoList) {
-                if (nodeInfo != null && nodeInfo.isClickable == clickable) {
-                    return nodeInfo
-                }
+        for (nodeInfo in nodeInfoList) {
+            if (nodeInfo.isClickable == clickable && stringEquals(nodeInfo, text)) {
+                return nodeInfo
             }
         }
         return null
@@ -89,39 +127,46 @@ open class BaseAccessibilityService : AccessibilityService() {
     fun findViewByID(id: String): AccessibilityNodeInfo? {
         val accessibilityNodeInfo = rootInActiveWindow ?: return null
         val nodeInfoList = accessibilityNodeInfo.findAccessibilityNodeInfosByViewId(id)
-        if (nodeInfoList != null && !nodeInfoList.isEmpty()) {
-            for (nodeInfo in nodeInfoList) {
-                if (nodeInfo != null) {
-                    return nodeInfo
-                }
-            }
+        for (nodeInfo in nodeInfoList) {
+            return nodeInfo
         }
         return null
     }
 
-    fun clickTextViewByText(text: String) {
+    /**
+     * 减少clickViewByText参数
+     */
+    fun clickViewByText(text: String, isEquals: Boolean) {
+        clickViewByText(text, isEquals, true)
+    }
+
+    /**
+     * 根据text点击当前view
+     *
+     * @param text 要超找view的text
+     * @param isEquals 是: 必须相等 否: >= text
+     * @param onlyOnce 是否只点击首个命中
+     */
+    fun clickViewByText(text: String, isEquals: Boolean, onlyOnce: Boolean) {
         val accessibilityNodeInfo = rootInActiveWindow ?: return
         val nodeInfoList = accessibilityNodeInfo.findAccessibilityNodeInfosByText(text)
-        if (nodeInfoList != null && !nodeInfoList.isEmpty()) {
-            for (nodeInfo in nodeInfoList) {
-                if (nodeInfo != null) {
-                    performViewClick(nodeInfo)
-                    break
-                }
+
+        for (nodeInfo in nodeInfoList) {
+            if (!isEquals || stringEquals(nodeInfo, text)) {
+                performViewClick(nodeInfo)
+                if (onlyOnce) return else break
             }
         }
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-    fun clickTextViewByID(id: String) {
+    fun clickViewByID(id: String) {
         val accessibilityNodeInfo = rootInActiveWindow ?: return
         val nodeInfoList = accessibilityNodeInfo.findAccessibilityNodeInfosByViewId(id)
-        if (nodeInfoList != null && !nodeInfoList.isEmpty()) {
-            for (nodeInfo in nodeInfoList) {
-                if (nodeInfo != null) {
-                    performViewClick(nodeInfo)
-                    break
-                }
+        for (nodeInfo in nodeInfoList) {
+            if (nodeInfo != null) {
+                performViewClick(nodeInfo)
+                break
             }
         }
     }
@@ -146,7 +191,15 @@ open class BaseAccessibilityService : AccessibilityService() {
     }
 
     override fun onAccessibilityEvent(event: AccessibilityEvent) {
-        NLogger.i(TAG, "onAccessibilityEvent package: ${event.packageName} type: ${event.eventType}")
+        eventPackageName = event.packageName.toString()
+        eventClassName = event.className.toString()
+        eventType = event.eventType
+        this.event = event
+        NLogger.i(TAG, "onAccessibilityEvent " +
+                "package: ${event.packageName} " +
+                "class: ${event.className} " +
+                "type: ${event.eventType} "
+        )
     }
 
     override fun onInterrupt() {}
