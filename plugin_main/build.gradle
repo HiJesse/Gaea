@@ -15,7 +15,7 @@ android {
         minSdkVersion project.minSdkVersion
         targetSdkVersion project.targetSdkVersion
         versionCode 1
-        versionName version
+        versionName versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -38,6 +38,8 @@ atlas {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    providedCompile project(':lib.base')
-    providedCompile project(':lib.common')
+    providedCompile project(':lib_base')
+    providedCompile project(':lib_common')
+    providedCompile project(':lib_network')
+    providedCompile project(':lib_accessibility')
 }

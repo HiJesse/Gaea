@@ -71,11 +71,11 @@ atlas {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':lib.base')
-    compile project(':lib.common')
-    compile project(':lib.network')
-    compile project(':lib.accessibility')
-    bundleCompile project(':plugin.main')
-    bundleCompile project(':plugin.user')
-    bundleCompile project(':remote.scanner')
+    compile project(':lib_base')
+    compile project(':lib_common')
+    compile project(':lib_network')
+    compile project(':lib_accessibility')
+    bundleCompile project(':plugin_main')
+    bundleCompile project(':plugin_user')
+    bundleCompile project(':remote_scanner')
 }

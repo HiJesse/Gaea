@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.taobao.atlas'
 
 android {
     compileSdkVersion project.targetSdkVersion
@@ -28,27 +28,7 @@ dependencies {
     testCompile project.libs['junit']
     androidTestCompile project.libs['espresso']
     androidTestCompile project.libs['runner']
-    compile project.libs['support-v7']
-    compile project.libs['design']
-    compile project.libs['kotlin']
-    compile project.libs['constraint-layout']
-    compile project.libs['atlas-core']
-    compile project.libs['lifecycle-extensions']
-    compile project.libs['lifecycle-runtime']
-
-    compile project.libs['retrofit']
-    compile project.libs['retrofit-gson']
-    compile project.libs['retrofit-rxjava']
-    compile project.libs['rxjava']
-    compile project.libs['rxandroid']
-    compile project.libs['NLogger']
-    compile project.libs['Toasty']
-    compile project.libs['ZXing']
-    compile project.libs['dialog']
-    compile project.libs['file-downloader']
-
-    compile project.libs['lock-view']
-    compile project.libs['lock-view-rx']
-
-    kapt project.libs['lifecycle-compiler']
+    compile project.libs["atlas-update"]
+    providedCompile project(':lib_base')
+    providedCompile project(':lib_network')
 }

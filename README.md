@@ -10,23 +10,24 @@ Gaea是一个基于Atlas实现Android项目组件化和插件化的脚手架. �
 	| 目录名 | 描述 |
 	| --- | ---------- |
 	| app | 宿主模块, 负责启动应用和启动页. |
-	| lib.* | 插件和宿主都依赖的中间件, 打包进宿主中. |
-	| plugin.* | 插件模块, 会在编译阶段编译成so打包进apk. |
-	| plugin.\*.lib | 插件依赖库, 会打包进插件中. |
-	| remote.* | 远程插件模块, 编译成so不打包进apk. |
-	| remote.\*.lib | 远程插件依赖库, 会打包进远程插件中. |
+	| lib\_* | 插件和宿主都依赖的中间件, 打包进宿主中. |
+	| plugin\_* | 插件模块, 会在编译阶段编译成so打包进apk. |
+	| plugin\_\*\_lib\_\* | 插件依赖库, 会打包进插件中. |
+	| remote\_* | 远程插件模块, 编译成so不打包进apk. |
+	| remote\_\*\_lib\_\* | 远程插件依赖库, 会打包进远程插件中. |
 
 * Gaea 项目结构
 
 	| 目录名 | 描述 |
 	| --- | ---------- |
 	| app | 宿主模块, 启动application和启动页. |
-	| lib.base | 所有模块都需要依赖的工具类, UI组件等(**不包含业务**). |
-	| lib.common | 所有模块都需要依赖的公共业务资源等(**只包含业务**). |
-	| lib.network | 网络组件, 提供网络接口相关操作. |
-	| plugin.main | main插件, 提供App主页等. |
-	| plugin.user | user插件, 提供用户中心登录等. |
-	| remote.scanner | scanner远程插件, 动态提供图形扫描功能. |
+	| lib\_base | 所有模块都需要依赖的工具类, UI组件等(**不包含业务**). |
+	| lib\_common | 所有模块都需要依赖的公共业务资源等(**只包含业务**). |
+	| lib\_network | 网络组件, 提供网络接口相关操作. |
+	| lib\_accessibility | android 辅助组件, 提供系统辅助操作. |
+	| plugin\_main | main插件, 提供App主页等. |
+	| plugin\_user | user插件, 提供用户中心登录等. |
+	| remote\_scanner | scanner远程插件, 动态提供图形扫描功能. |
 
 ### 插件间交互
 

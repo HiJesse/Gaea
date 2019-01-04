@@ -16,6 +16,7 @@ ext {
 
     libs = [
             'junit'               : 'junit:junit:4.12',
+            "mockito"             : 'org.mockito:mockito-core:1.10.19',
             'runner'              : 'com.android.support.test:runner:1.0.1',
             'espresso'            : 'com.android.support.test.espresso:espresso-core:3.0.1',
 
@@ -41,8 +42,8 @@ ext {
             'support-v7'          : 'com.android.support:appcompat-v7:27.0.2',
             'design'              : 'com.android.support:design:27.0.2',
             'constraint-layout'   : 'com.android.support.constraint:constraint-layout:1.0.2',
-            'lock-view': 'com.andrognito.patternlockview:patternlockview:1.0.0',
-            'lock-view-rx': 'com.andrognito.patternlockview:patternlockview-reactive:1.0.0',
+            'lock-view'           : 'com.andrognito.patternlockview:patternlockview:1.0.0',
+            'lock-view-rx'        : 'com.andrognito.patternlockview:patternlockview-reactive:1.0.0',
     ]
 
     atlasConfig = [
